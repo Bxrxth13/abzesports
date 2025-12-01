@@ -1,0 +1,480 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================
+   Custom Fonts
+   =========================== */
+@font-face {
+  font-family: 'MainHeading';
+  src: url('/mainheading.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SubHeading';
+  src: url('/subheading.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===========================
+   Global / Base
+   =========================== */
+html,
+body {
+  background-color: #000 !important;
+  height: -webkit-fill-available;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-height: 100svh;
+  min-height: -webkit-fill-available;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+#root, main { overflow-x: hidden; }
+
+/* ===========================
+   Scrollbar Styling
+   =========================== */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: linear-gradient(180deg, #0b0b0b 0%, #111 100%); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.35);
+  animation: scrollbarGlow 2.2s ease-in-out infinite;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #f87171 0%, #dc2626 100%);
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.55);
+}
+::-webkit-scrollbar-corner { background: #0b0b0b; }
+@keyframes scrollbarGlow {
+  0%,100% { box-shadow: 0 0 10px rgba(239,68,68,.35); }
+  50% { box-shadow: 0 0 18px rgba(239,68,68,.6); }
+}
+
+/* Firefox scrollbar */
+* { scrollbar-width: thin; scrollbar-color: #ef4444 #0b0b0b; }
+
+/* ===========================
+   Typography
+   =========================== */
+h1 {
+  font-family: 'MainHeading', sans-serif !important;
+  line-height: 1.15 !important;
+  letter-spacing: .02em !important;
+  margin-top: 0 !important;
+  margin-bottom: 2rem !important;
+}
+h2 {
+  font-family: 'MainHeading', sans-serif !important;
+  line-height: 1.3 !important;
+  margin-top: 0 !important;
+  margin-bottom: 1.5rem !important;
+}
+h3 {
+  font-family: 'SubHeading', sans-serif !important;
+  line-height: 1.4 !important;
+  margin-top: 0 !important;
+  margin-bottom: 1.25rem !important;
+}
+h4 {
+  font-family: 'SubHeading', sans-serif !important;
+  line-height: 1.5 !important;
+  margin-top: 0 !important;
+  margin-bottom: 1rem !important;
+}
+h5 {
+  font-family: 'SubHeading', sans-serif !important;
+  line-height: 1.5 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.875rem !important;
+}
+h6 {
+  font-family: 'SubHeading', sans-serif !important;
+  line-height: 1.6 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.75rem !important;
+}
+
+/* Responsive heading spacing adjustments */
+@media (max-width: 768px) {
+  h1 {
+    margin-bottom: 1.5rem !important;
+  }
+  h2 {
+    margin-bottom: 1.25rem !important;
+  }
+  h3 {
+    margin-bottom: 1rem !important;
+  }
+  h4 {
+    margin-bottom: 0.875rem !important;
+  }
+  h5 {
+    margin-bottom: 0.75rem !important;
+  }
+  h6 {
+    margin-bottom: 0.625rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  h1 {
+    margin-bottom: 1.25rem !important;
+  }
+  h2 {
+    margin-bottom: 1rem !important;
+  }
+  h3 {
+    margin-bottom: 0.875rem !important;
+  }
+  h4 {
+    margin-bottom: 0.75rem !important;
+  }
+  h5 {
+    margin-bottom: 0.625rem !important;
+  }
+  h6 {
+    margin-bottom: 0.5rem !important;
+  }
+}
+p {
+  font-family: 'SubHeading', sans-serif !important;
+  line-height: 1.8 !important;
+  letter-spacing: .01em !important;
+  word-spacing: .05em !important;
+}
+
+/* Form & Button Fonts */
+button,input,textarea,select,::placeholder {
+  font-family: 'SubHeading', sans-serif !important;
+  letter-spacing: .01em !important;
+}
+button { font-weight: 600 !important; letter-spacing: .02em !important; }
+::placeholder { opacity: .7 !important; }
+
+/* ===========================
+   HERO IMAGE RESPONSIVE FIX
+   =========================== */
+section#hero,
+.hero {
+  overflow: hidden;
+}
+
+/* ===========================
+   HERO & CAROUSEL SPACING FIXES
+   =========================== */
+/* Keep mobile padding tight */
+@media (max-width: 640px) {
+  section#hero {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+}
+
+section#hero img,
+.hero img,
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: all 0.5s ease-in-out;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  section#hero img,
+  .hero-img {
+    object-position: center center;
+    transform: scale(1.02);
+  }
+}
+
+/* Mobile Landscape */
+@media (max-width: 768px) {
+  section#hero img,
+  .hero-img {
+    height: auto;
+    max-height: 100svh;
+    object-fit: cover;
+    object-position: center top;
+    transform: scale(1.05);
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 640px) {
+  section#hero img,
+  .hero-img {
+    width: 100%;
+    height: auto;
+    max-height: 100svh;
+    object-fit: cover;
+    object-position: top center;
+    transform: scale(1.08);
+  }
+}
+
+/* Extra small */
+@media (max-width: 420px) {
+  section#hero img,
+  .hero-img {
+    transform: scale(1.03);
+    object-position: top center;
+  }
+}
+
+/* ===========================
+   Player Card Images
+   =========================== */
+.player-card__image {
+  background-size: cover !important;
+  background-position: center top !important;
+}
+@media (max-width:640px){.player-card__image{height:16rem!important}}
+@media (min-width:641px) and (max-width:768px){.player-card__image{height:18rem!important}}
+@media (min-width:769px){.player-card__image{height:20rem!important}}
+
+/* ===========================
+   Reduce Motion Preference
+   =========================== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .01ms!important;
+    animation-iteration-count: 1!important;
+    transition-duration: .01ms!important;
+    scroll-behavior: auto!important;
+  }
+}
+
+/* Safe-area padding helpers */
+.safe-top { padding-top: env(safe-area-inset-top); }
+.safe-right { padding-right: env(safe-area-inset-right); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.safe-left { padding-left: env(safe-area-inset-left); }
+
+/* ===========================
+   Responsive Spacing Tokens + Container
+   =========================== */
+:root{
+  --sec-y-mobile: clamp(14px, 4.0vw, 22px);
+  --sec-y-tablet: clamp(20px, 4.5vw, 30px);
+  --sec-y-desktop: clamp(28px, 5.0vw, 44px);
+  --sec-x: clamp(12px, 3.5vw, 32px);
+}
+.container-safe{ width:min(1200px,92%); margin-inline:auto; padding-inline:var(--sec-x); }
+html,body,#root,main{ overflow-x:hidden; }
+
+/* Keep fixed edge UI (right wall buttons) above content */
+.edge-ui{ position:fixed; z-index:60; }
+
+/* Watch Live button with full rectangular border */
+.watch-live-btn {
+  border: 2px solid white !important;
+  border-left: 4px solid white !important;
+  clip-path: none !important;
+}
+
+/* Mobile-first safety to avoid big bands */
+@media (max-width: 640px){
+  /* cap any huge section paddings - exclude hero */
+  section:not(#hero)[class*="py-24"],
+  section:not(#hero)[class*="py-28"],
+  section:not(#hero)[class*="py-32"],
+  section:not(#hero)[class*="py-36"],
+  section:not(#hero)[class*="py-40"],
+  section:not(#hero)[class*="py-48"]{ 
+    padding-top:var(--sec-y-mobile)!important; 
+    padding-bottom:var(--sec-y-mobile)!important; 
+  }
+  /* neutralize giant min-heights on phones - exclude hero */
+  section:not(#hero)[class*="min-h-[70vh]"],
+  section:not(#hero)[class*="min-h-[80vh]"],
+  section:not(#hero)[class*="min-h-[85vh]"],
+  section:not(#hero)[class*="min-h-[90vh]"]{ 
+    min-height:auto!important; 
+  }
+}
+
+/* HERO: overflow hidden only, let component control height */
+section#hero,.hero{ overflow:hidden; }
+
+/* Carousel/hero images: fluid */
+.hero-img, section#hero img{ width:100%; height:auto; object-fit:cover; object-position:top center; }
+
+/* PlayerCard hooks: prevent mobile squares & crop */
+.player-card{ position:relative; }
+.player-card__media{ aspect-ratio:auto; height:auto; }
+.player-card__media>img{ width:100%; height:auto; object-fit:contain; object-position:top center; }
+@media (min-width:640px){
+  .player-card__media{ aspect-ratio:3/4; }
+  .player-card__media>img{ height:100%; object-fit:cover; object-position:top; }
+}
+@media (max-width:639.98px){
+  .player-card{ height:auto!important; }
+  .player-card__media{ aspect-ratio:auto!important; height:auto!important; }
+  .player-card__media>img{ height:auto!important; object-fit:contain!important; }
+}
+
+/* ===========================
+   Player Card Mobile Safety
+   Ensure cards never get forced square on small screens
+   =========================== */
+@media (max-width: 639.98px) {
+  .player-card { height: auto !important; }
+  .player-card__media { aspect-ratio: auto !important; height: auto !important; }
+  .player-card__media > img { height: auto !important; object-fit: contain !important; }
+}
+/* Enforce 2-up on mobile even if a wrapper tries to override */
+@media (max-width: 640px) {
+  .players-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .players-grid > * {
+    grid-column: span 1 / span 1 !important;
+    width: auto !important;
+  }
+}
+
+/* ===========================
+   PAGE HEIGHT NORMALIZATION SYSTEM
+   =========================== */
+:root {
+  --header-h: 64px;       /* default fallbacks; will be measured */
+  --footer-h: 0px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  /* Use small viewport units for mobile (iOS/Chrome): */
+  --vh: 1svh;
+  --page-min-h: calc(100svh - var(--header-h) - var(--footer-h) - var(--safe-bottom));
+}
+
+/* Fallback for browsers without svh support */
+@supports not (height: 100svh) {
+  :root { 
+    --vh: 1vh; 
+    --page-min-h: calc(100vh - var(--header-h) - var(--footer-h) - var(--safe-bottom)); 
+  }
+}
+
+/* Page wrapper utility - ensures consistent viewport filling */
+.page {
+  min-height: var(--page-min-h);
+}
+
+/* Safety: remove huge base min-heights on sections on mobile; keep at md+ only */
+/* Exclude hero section from this rule */
+@media (max-width: 640px) {
+  section:not(#hero)[class*="min-h-[70vh]"], 
+  section:not(#hero)[class*="min-h-[80vh]"], 
+  section:not(#hero)[class*="min-h-[85vh]"],
+  section:not(#hero)[class*="min-h-[90vh]"], 
+  section:not(#hero)[class*="min-h-svh"],
+  section:not(#hero)[class*="min-h-[64vh]"] {
+    min-height: auto !important;
+  }
+}
+
+/* Optional: if Hero has big min-heights, keep them only at md+ */
+@media (min-width: 768px) {
+  #hero.hero-force-tall { min-height: 64vh; }
+}
+@media (min-width: 1024px) {
+  #hero.hero-force-tall { min-height: 80vh; }
+}
+
+/* === Mobile seam guards: neutralize tall min-heights and spacer paddings === */
+@media (max-width: 640px) {
+  /* 1) Hard-stop ALL ad-hoc min-h-[*vh] utilities on phones */
+  #hero { min-height: auto !important; }
+  /* generic neutralizer for any Tailwind arbitrary vh min-height */
+  [class*="min-h-["][class*="vh]"] { min-height: auto !important; }
+
+  /* 2) Ensure consecutive sections don't introduce margins */
+  section + section { margin-top: 0 !important; }
+
+  /* 3) Keep the seam tight: hero bottom 0, about top small */
+  #hero { padding-bottom: 0 !important; }
+  #about, section#about { padding-top: 0.5rem !important; } /* ~8px */
+}
+
+/* Keep existing guards */
+#hero { isolation: isolate; background-color: #000; }
+@media (max-width: 640px) {
+  .hero-carousel, section[id*="carousel"] { margin-top:0 !important; padding-top:0 !important; }
+}
+
+/* ===========================
+   3D Perspective & Transform Utilities
+   =========================== */
+.perspective {
+  perspective: 1000px;
+}
+
+.perspective-lg {
+  perspective: 1500px;
+}
+
+.perspective-xl {
+  perspective: 2000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* 3D Tilt utilities */
+.tilt-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out;
+}
+
+.tilt-card:hover {
+  transform: rotateY(var(--rotate-y, 0deg)) rotateX(var(--rotate-x, 0deg));
+}
+
+/* Parallax layers */
+.parallax-layer {
+  will-change: transform;
+}
+
+/* GPU acceleration hints */
+.will-animate {
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card:hover {
+    transform: none;
+  }
+  .will-animate {
+    will-change: auto;
+  }
+}
