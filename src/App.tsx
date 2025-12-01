@@ -225,8 +225,8 @@ const GamesSection = () => {
         {/* Player Cards Grid */}
         {activeGame ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 perspective">
-            {players[activeGame as keyof typeof players]?.map((player, index) => (
-              <PlayerCard key={player.alias} player={player} index={index} />
+            {players[activeGame as keyof typeof players]?.map((player) => (
+              <PlayerCard key={player.alias} player={player} />
             ))}
           </div>
         ) : null}
@@ -237,7 +237,7 @@ const GamesSection = () => {
 };
 
 // Player Card
-const PlayerCard = ({ player, index }: { player: any; index: number }) => {
+const PlayerCard = ({ player }: { player: any }) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -428,20 +428,30 @@ const FoundersPage = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section ref={sectionRef} id="founders" className="relative overflow-hidden flex items-center justify-center py-[var(--sec-y-mobile)] md:py-[var(--sec-y-tablet)] lg:py-[var(--sec-y-desktop)] md:min-h-[64vh] lg:min-h-[80vh]" style={{ backgroundColor: '#0a0a0a' }}>
+    <section
+      ref={sectionRef}
+      id="founders"
+      className="relative overflow-hidden flex items-center justify-center py-[var(--sec-y-mobile)] md:py-[var(--sec-y-tablet)] lg:py-[var(--sec-y-desktop)] md:min-h-[64vh] lg:min-h-[80vh] bg-gradient-to-b from-black via-[#050308] to-black"
+    >
       {/* Futuristic Background System */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
 
-        <div className="absolute inset-0 opacity-10 hidden sm:block" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill='none' stroke='%23FF1E1E' stroke-width='1'/%3E%3C/svg%3E")`,
-          backgroundSize: '60px 60px'
-        }}></div>
+        {/* Subtle hex grid pattern with stronger contrast */}
+        <div
+          className="absolute inset-0 opacity-25 hidden sm:block"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill='none' stroke='%23FF2626' stroke-width='1'/%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}
+        ></div>
 
-        <div className="absolute top-0 left-0 w-80 sm:w-96 h-80 sm:h-96 bg-red-600/5 rounded-full blur-3xl"></div>
-        <div className="absolute top-0 right-0 w-80 sm:w-96 h-80 sm:h-96 bg-red-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-1/3 w-[420px] sm:w-[600px] h-[420px] sm:h-[600px] bg-red-600/10 rounded-full blur-3xl"></div>
+        {/* Stronger red glows to frame the cards */}
+        <div className="absolute top-[-120px] left-[-80px] w-80 sm:w-96 h-80 sm:h-96 bg-red-700/35 rounded-full blur-3xl"></div>
+        <div className="absolute top-[-80px] right-[-60px] w-80 sm:w-96 h-80 sm:h-96 bg-red-500/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-[-200px] left-1/3 w-[420px] sm:w-[600px] h-[420px] sm:h-[600px] bg-red-600/35 rounded-full blur-[90px]"></div>
 
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-32 sm:h-64 bg-gradient-to-b from-red-900/10 to-transparent"></div>
+        {/* Dark top vignette so the heading pops */}
+        <div className="absolute top-0 left-0 right-0 h-32 sm:h-56 bg-gradient-to-b from-black via-black/70 to-transparent"></div>
       </div>
 
       <div className="relative container-safe">
@@ -468,7 +478,7 @@ const FoundersPage = () => {
             { name: 'Maruthachala Moorthy', title: 'CEO & Founder', color: 'from-red-600 to-orange-600' },
             { name: 'Prakash Ramasamy', title: 'Co-Founder', color: 'from-red-500 to-red-700' },
             { name: 'Prashath Krishnan', title: 'Co-Founder', color: 'from-orange-600 to-red-600' }
-          ].map((founder, index) => (
+          ].map((founder) => (
             <div
               key={founder.name}
               className="group relative"
