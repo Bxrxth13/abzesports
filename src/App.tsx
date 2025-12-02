@@ -121,8 +121,8 @@ const Hero = () => {
 
       <div className="relative z-10 container-safe text-center flex flex-col gap-4 sm:gap-6 md:gap-8">
         <div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight">
-            AUTOBOTZ <span className="text-red-600">ESPORTS</span>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-normal">
+            AUTOBOTZ <span className="text-red-600 ml-2 sm:ml-3 md:ml-4">ESPORTS</span>
           </h1>
         </div>
 
@@ -441,7 +441,7 @@ const FoundersPage = () => {
           className="absolute inset-0 opacity-25 hidden sm:block"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill='none' stroke='%23FF2626' stroke-width='1'/%3E%3C/svg%3E")`,
-            backgroundSize: '60px 60px'
+          backgroundSize: '60px 60px'
           }}
         ></div>
 
@@ -559,8 +559,8 @@ const ConsultationPage = () => {
       <div className="relative w-full container-safe">
         {/* Main Title */}
         <div className="text-center flex flex-col gap-1.5 sm:gap-2 mb-6 sm:mb-10 pt-12 sm:pt-16 md:pt-20">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white">
-            REACH <span className="text-red-600">US</span> NOW!
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-wide">
+            REACH <span className="text-red-600 ml-2 sm:ml-3 md:ml-4">US</span> <span className="ml-2 sm:ml-3 md:ml-4">NOW!</span>
           </h2>
           <p className="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto">
             Drop your details and we'll get back within 24 hours.
@@ -684,9 +684,9 @@ function App() {
         header={<Header heroEl={heroEl} />}
         footer={
           <footer id="footer" className="relative overflow-hidden py-[var(--sec-y-mobile)] md:py-[var(--sec-y-tablet)] lg:py-[var(--sec-y-desktop)] bg-black">
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-red-900 via-black to-black opacity-60"></div>
-          </div>
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-red-900 via-black to-black opacity-60"></div>
+        </div>
 
         <div className="relative container-safe">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-10">

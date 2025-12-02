@@ -56,19 +56,21 @@ const Footer: React.FC = () => {
             
             {/* Social Links */}
             <div className="flex items-center space-x-3">
-              {socialLinks.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    className="w-10 h-10 bg-gray-900 border-l-4 border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-600 transition-all"
-                    aria-label={social.label}
-                  >
-                    <Icon size={18} />
-                  </a>
-                );
-              })}
+              {[
+                { label: 'YouTube', href: '#', icon: '▶' },
+                { label: 'Twitter', href: '#', icon: '🐦' },
+                { label: 'Instagram', href: '#', icon: '📷' },
+                { label: 'Discord', href: '#', icon: '💬' }
+              ].map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  className="w-10 h-10 bg-gray-900 border-l-4 border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-600 transition-all"
+                  aria-label={social.label}
+                >
+                  <span className="text-lg">{social.icon}</span>
+                </a>
+              ))}
             </div>
           </div>
           
@@ -119,7 +121,7 @@ const Footer: React.FC = () => {
                 className="bg-red-600 text-white font-bold px-8 py-3 uppercase hover:bg-red-700 transition-colors border-l-4 border-red-400 flex items-center gap-2"
               >
                 SUBSCRIBE
-                <ArrowRight size={18} />
+                <span className="text-lg">→</span>
               </button>
             </form>
           </div>
@@ -129,7 +131,7 @@ const Footer: React.FC = () => {
         <div className="border-t-2 border-gray-800 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
             <div className="text-gray-500">
-              © 2025 ABZ ESPORTS. All rights reserved.
+              © 2025 Autobotz Esports. All rights reserved.
             </div>
             
             <div className="flex items-center space-x-6">

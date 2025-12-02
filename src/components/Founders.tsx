@@ -45,20 +45,20 @@ const Founders: React.FC = () => {
         </div>
 
         <div
-          key={selectedFounder}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
-        >
-          {/* Founder Profile */}
-          <div className="text-center lg:text-left">
+            key={selectedFounder}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+          >
+            {/* Founder Profile */}
+            <div className="text-center lg:text-left">
             <div className="relative mb-8">
                 <img
                   src={founders[selectedFounder].image}
                   alt={founders[selectedFounder].name}
                   className="w-64 h-64 mx-auto lg:mx-0 rounded-2xl object-cover border-4 border-red-600"
                 />
-              <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-3xl">
-                🏅
-              </div>
+                <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-3xl">
+                  🏅
+                </div>
             </div>
 
             <div>
@@ -77,25 +77,25 @@ const Founders: React.FC = () => {
                   {founders[selectedFounder].bio}
                 </p>
 
-              {/* Social Links */}
-              <div className="flex justify-center lg:justify-start space-x-4 mb-8">
-                {Object.entries(founders[selectedFounder].socials).map(([platform, url]) => {
-                  const icon = platform === 'twitter' ? '🐦' : platform === 'linkedin' ? '💼' : platform === 'instagram' ? '📷' : '🔗';
-                  if (!url) return null;
-                  
-                  return (
+                {/* Social Links */}
+                <div className="flex justify-center lg:justify-start space-x-4 mb-8">
+                  {Object.entries(founders[selectedFounder].socials).map(([platform, url]) => {
+                    const icon = platform === 'twitter' ? '🐦' : platform === 'linkedin' ? '💼' : platform === 'instagram' ? '📷' : '🔗';
+                    if (!url) return null;
+                    
+                    return (
                     <a
-                      key={platform}
-                      href={url}
-                      className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-colors text-xl"
-                    >
-                      {icon}
+                        key={platform}
+                        href={url}
+                        className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-colors text-xl"
+                      >
+                        {icon}
                     </a>
-                  );
-                })}
-              </div>
+                    );
+                  })}
+                </div>
             </div>
-          </div>
+            </div>
 
             {/* Timeline */}
             <div className="bg-gray-900 rounded-2xl p-8 border border-gray-800">

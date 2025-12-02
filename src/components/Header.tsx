@@ -72,27 +72,27 @@ const Header: React.FC = () => {
       </nav>
       
       {/* Mobile Menu */}
-      {isMenuOpen && (
+        {isMenuOpen && (
         <div className="lg:hidden bg-black bg-opacity-98 backdrop-blur-md border-t border-red-600 border-opacity-20">
-          <div className="px-4 py-6 space-y-4">
+            <div className="px-4 py-6 space-y-4">
             {navItems.map((item) => (
               <a
-                key={item.name}
-                href={item.href}
-                className="block text-gray-300 hover:text-white transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
+                  key={item.name}
+                  href={item.href}
+                  className="block text-gray-300 hover:text-white transition-colors py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
               </a>
-            ))}
+              ))}
             <div className="pt-4">
-              <Button variant="primary" className="w-full">
-                Join Team
-              </Button>
+                <Button variant="primary" className="w-full">
+                  Join Team
+                </Button>
             </div>
           </div>
         </div>
-      )}
+        )}
     </header>
   );
 };

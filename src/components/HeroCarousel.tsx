@@ -25,19 +25,19 @@ const HeroCarousel = () => {
     >
       <div className="relative w-full">
         <div
-          key={currentIndex}
-          className="relative w-full sm:aspect-[16/9] overflow-hidden"
-        >
-          {/* MOBILE: natural height → no letterboxing; DESKTOP: cover inside aspect */}
-          <img
-            src={images[currentIndex]}
-            alt={`Slide ${currentIndex + 1}`}
-            className="
-              block w-full h-auto
-              sm:absolute sm:inset-0 sm:w-full sm:h-full
-              sm:object-cover sm:object-top
-            "
-          />
+            key={currentIndex}
+            className="relative w-full sm:aspect-[16/9] overflow-hidden"
+          >
+            {/* MOBILE: natural height → no letterboxing; DESKTOP: cover inside aspect */}
+            <img
+              src={images[currentIndex]}
+              alt={`Slide ${currentIndex + 1}`}
+              className="
+                block w-full h-auto
+                sm:absolute sm:inset-0 sm:w-full sm:h-full
+                sm:object-cover sm:object-top
+              "
+            />
         </div>
 
         {/* Indicators: inline below image on mobile; overlaid on sm+ */}
