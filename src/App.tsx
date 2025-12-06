@@ -101,7 +101,11 @@ const Header = ({ heroEl }: { heroEl: HTMLElement | null }) => {
 };
 
 // Hero Component
+import Modal from './components/shared/Modal';
+
 const Hero = () => {
+  const [isLiveModalOpen, setIsLiveModalOpen] = useState(false);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -139,12 +143,67 @@ const Hero = () => {
             Join Squad
           </button>
           <button
-            onClick={() => alert('Live streaming coming soon!')}
+            onClick={() => setIsLiveModalOpen(true)}
             className="watch-live-btn relative bg-transparent text-white font-bold py-3 sm:py-4 px-8 sm:px-12 hover:bg-white hover:text-black transition-all duration-300 text-base sm:text-lg uppercase tracking-wide hover:shadow-[0_0_25px_rgba(255,255,255,0.5)]"
           >
             Watch Live
           </button>
         </div>
+
+        {/* Sporty Watch Live Popup */}
+        <Modal
+          isOpen={isLiveModalOpen}
+          onClose={() => setIsLiveModalOpen(false)}
+          title="Watch Live • Autobotz Arena"
+        >
+          <div className="space-y-5 text-left text-white">
+            <p className="text-lg sm:text-xl font-extrabold">
+              🔴 Live streams are gearing up!{" "}
+              <span className="font-semibold">
+                Soon you&apos;ll be able to watch our squads battle it out across BGMI, Free Fire,
+                Pokémon Unite and more.
+              </span>
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+              <div className="bg-gradient-to-br from-gray-900 to-black border border-red-500 rounded-lg p-4">
+                <div className="text-xs text-red-400 font-semibold mb-1 uppercase tracking-wide">
+                  Upcoming
+                </div>
+                <div className="text-white font-bold">BGMI Scrims</div>
+                <div className="text-white text-xs">Daily • 8:00 PM IST</div>
+              </div>
+              <div className="bg-gradient-to-br from-gray-900 to-black border border-red-500 rounded-lg p-4">
+                <div className="text-xs text-red-400 font-semibold mb-1 uppercase tracking-wide">
+                  Featuring
+                </div>
+                <div className="text-white font-bold">Autobotz Main Squad</div>
+                <div className="text-white text-xs">Clutch plays, rotations & finishes</div>
+              </div>
+              <div className="bg-gradient-to-br from-gray-900 to-black border border-red-500 rounded-lg p-4">
+                <div className="text-xs text-red-400 font-semibold mb-1 uppercase tracking-wide">
+                  Status
+                </div>
+                <div className="text-white font-bold">Coming Soon</div>
+                <div className="text-white text-xs">Stay tuned for the first drop</div>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <button
+                type="button"
+                onClick={() => setIsLiveModalOpen(false)}
+                className="flex-1 bg-red-600 text-white font-bold py-3 px-4 uppercase tracking-wide border-l-4 border-red-400 hover:bg-red-700 transition-colors"
+              >
+                Got It • I&apos;ll Wait
+              </button>
+              <button
+                type="button"
+                className="flex-1 bg-transparent text-white font-semibold py-3 px-4 border border-gray-600 hover:border-red-600 hover:text-red-400 transition-colors text-sm"
+              >
+                Join our Discord for live updates
+              </button>
+            </div>
+          </div>
+        </Modal>
       </div>
     </section>
   );
@@ -748,7 +807,7 @@ function App() {
                   Support
                 </button>
               </div>
-              <p className="text-gray-500">© 2025 ABZ ESPORTS. All rights reserved.</p>
+              <p className="text-gray-500">© 2025 Autobotz Esports. All rights reserved.</p>
             </div>
           </div>
         </div>
@@ -799,7 +858,7 @@ function App() {
               </div>
               <div className="text-gray-300 space-y-3 sm:space-y-4 text-sm sm:text-base">
                 <p>
-                  At ABZ ESPORTS, we are committed to protecting your privacy and personal information.
+                  At Autobotz Esports, we are committed to protecting your privacy and personal information.
                   This Privacy Policy explains how we collect, use, and safeguard your data.
                 </p>
                 <h3 className="text-lg sm:text-xl font-semibold text-white">Information We Collect</h3>
@@ -838,7 +897,7 @@ function App() {
               </div>
               <div className="text-gray-300 space-y-3 sm:space-y-4 text-sm sm:text-base">
                 <p>
-                  Welcome to ABZ ESPORTS. These Terms of Service govern your use of our website
+                  Welcome to Autobotz Esports. These Terms of Service govern your use of our website
                   and services. By using our platform, you agree to these terms.
                 </p>
                 <h3 className="text-lg sm:text-xl font-semibold text-white">Acceptable Use</h3>
@@ -850,13 +909,13 @@ function App() {
                 <h3 className="text-lg sm:text-xl font-semibold text-white">Intellectual Property</h3>
                 <p>
                   All content on our platform, including text, graphics, logos, and software,
-                  is the property of ABZ ESPORTS and is protected by copyright and other
+                  is the property of Autobotz Esports and is protected by copyright and other
                   intellectual property laws.
                 </p>
                 <h3 className="text-lg sm:text-xl font-semibold text-white">Contact Us</h3>
                 <p>
                   If you have any questions about these Terms of Service, please contact us at
-                  legal@abzesports.com
+                  legal@autobotzesports.com
                 </p>
               </div>
             </div>
@@ -884,7 +943,7 @@ function App() {
                 </p>
                 <h3 className="text-lg sm:text-xl font-semibold text-white">Contact Support</h3>
                 <p>
-                  <strong>Email:</strong> support@abzesports.com<br />
+                  <strong>Email:</strong> support@autobotzesports.com<br />
                   <strong>Phone:</strong> +91 XXXX-XXXX-XX<br />
                   <strong>Hours:</strong> Monday - Friday, 9:00 AM - 6:00 PM IST
                 </p>

@@ -42,12 +42,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, classNa
   return (
         <>
       <div
-            className="fixed inset-0 bg-black bg-opacity-75 z-50"
+            className="fixed inset-0 bg-black bg-opacity-40 z-50"
             onClick={onClose}
           />
           <div className="fixed inset-0 flex items-center justify-center z-51 p-4">
         <div
-              className={`bg-gray-900 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-800 ${className}`}
+              className={`bg-gray-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-red-600/60 shadow-2xl ${className}`}
               onClick={(e) => e.stopPropagation()}
             >
               {title && (

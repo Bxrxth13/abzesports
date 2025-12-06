@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
             </div>
             
             {/* Social Links */}
-            <div className="flex items-center space-x-3">
+            {/* <div className="flex items-center space-x-3">
               {[
                 { label: 'YouTube', href: '#', icon: '▶' },
                 { label: 'Twitter', href: '#', icon: '🐦' },
@@ -71,7 +71,7 @@ const Footer: React.FC = () => {
                   <span className="text-lg">{social.icon}</span>
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
           
           {/* Links Grid */}
