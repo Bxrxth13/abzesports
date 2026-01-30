@@ -1,4 +1,6 @@
 import React from 'react';
+import { Youtube, Twitch, Instagram, Play, Eye, Users } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Creator } from '../../data/sampleData';
 
 interface CreatorCardProps {
@@ -26,26 +28,34 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onClick }) =>
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      whileHover={{ y: -8 }}
       className="group bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-red-600 transition-all duration-300 cursor-pointer"
       onClick={onClick}
     >
       {/* Latest Video Thumbnail */}
       <div className="relative aspect-video overflow-hidden">
-        <img
+        <motion.img
           src={creator.latestVideo.thumbnail}
           alt={creator.latestVideo.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-        
+
         {/* Play Button Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center">
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0.8 }}
+          whileHover={{ scale: 1, opacity: 1 }}
+          className="absolute inset-0 flex items-center justify-center"
+        >
           <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-lg">
-            <span className="text-white text-2xl">▶</span>
+            <Play className="w-6 h-6 text-white ml-1" fill="white" />
           </div>
-        </div>
-        
+        </motion.div>
+
         {/* Video Info */}
         <div className="absolute bottom-3 left-3 right-3">
           <h4 className="text-white font-semibold text-sm line-clamp-1 mb-1">
@@ -57,14 +67,15 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onClick }) =>
           </div>
         </div>
       </div>
-      
+
       {/* Creator Info */}
       <div className="p-6">
         <div className="flex items-center space-x-4 mb-4">
-          <img
+          <motion.img
             src={creator.avatar}
             alt={creator.name}
             className="w-12 h-12 rounded-full border-2 border-red-600 object-cover"
+            whileHover={{ scale: 1.1 }}
           />
           <div className="flex-1">
             <h3 className="text-lg font-bold text-white group-hover:text-red-400 transition-colors">
@@ -72,14 +83,14 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onClick }) =>
             </h3>
             <p className="text-gray-400 text-sm">@{creator.handle}</p>
           </div>
-          
+
           {/* Platform Badge */}
           <div className={`p-2 rounded-full ${getPlatformColor(creator.platform)}`}>
             {creator.platform === 'youtube' && <Youtube className="w-5 h-5" />}
             {creator.platform === 'twitch' && <Twitch className="w-5 h-5" />}
           </div>
         </div>
-        
+
         {/* Stats */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
@@ -91,36 +102,38 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onClick }) =>
             {creator.game}
           </span>
         </div>
-        
+
         {/* Social Links & CTA */}
         <div className="flex items-center justify-between">
           <div className="flex space-x-3">
             {Object.entries(creator.socials).map(([platform, url]) => {
               const Icon = getSocialIcon(platform);
               if (!Icon || !url) return null;
-              
+
               return (
-                <a
+                <motion.a
                   key={platform}
                   href={url}
+                  whileHover={{ scale: 1.2 }}
                   className="text-gray-400 hover:text-red-600 transition-colors"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Icon size={18} />
-                </a>
+                </motion.a>
               );
             })}
           </div>
-          
-          <button
+
+          <motion.button
+            whileHover={{ scale: 1.05 }}
             className="bg-red-600 text-white text-sm font-semibold px-4 py-2 rounded-full hover:bg-red-700 transition-colors"
             onClick={(e) => e.stopPropagation()}
           >
             Contact
-          </button>
+          </motion.button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

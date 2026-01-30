@@ -178,8 +178,8 @@ section#hero,
 /* Keep mobile padding tight */
 @media (max-width: 640px) {
   section#hero {
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
+    padding-top: 4rem !important; /* Account for navbar */
+    padding-bottom: 2rem !important;
   }
 }
 
@@ -398,17 +398,17 @@ section#hero,.hero{ overflow:hidden; }
 
 /* === Mobile seam guards: neutralize tall min-heights and spacer paddings === */
 @media (max-width: 640px) {
-  /* 1) Hard-stop ALL ad-hoc min-h-[*vh] utilities on phones */
-  #hero { min-height: auto !important; }
-  /* generic neutralizer for any Tailwind arbitrary vh min-height */
-  [class*="min-h-["][class*="vh]"] { min-height: auto !important; }
+  /* 1) Adjust min-height for hero to ensure it takes up significant viewport space */
+  #hero { min-height: 80svh !important; }
+  /* generic neutralizer for other arbitrary vh min-heights */
+  section:not(#hero)[class*="min-h-["][class*="vh]"] { min-height: auto !important; }
 
   /* 2) Ensure consecutive sections don't introduce margins */
   section + section { margin-top: 0 !important; }
 
   /* 3) Keep the seam tight: hero bottom 0, about top small */
-  #hero { padding-bottom: 0 !important; }
-  #about, section#about { padding-top: 0.5rem !important; } /* ~8px */
+  #hero { padding-bottom: 1rem !important; }
+  #about, section#about { padding-top: 2rem !important; } /* More breathable breathing room */
 }
 
 /* Keep existing guards */

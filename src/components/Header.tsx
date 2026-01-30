@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { Gamepad2, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Button from './shared/Button';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Games', href: '/games' },
@@ -21,19 +23,23 @@ const Header: React.FC = () => {
     { name: 'Consultation', href: '/consultation' },
     { name: 'Contact', href: '/contact' }
   ];
-  
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black bg-opacity-95 backdrop-blur-md border-b border-red-600 border-opacity-20' : 'bg-transparent'
-      }`}
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-black bg-opacity-95 backdrop-blur-md border-b border-red-600 border-opacity-20' : 'bg-transparent'
+        }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center space-x-3"
+          >
             <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center">
-              <span className="text-white text-xl">🎮</span>
+              <Gamepad2 size={24} className="text-white" />
             </div>
             <div>
               <h1 className="text-xl font-bold text-white tracking-wider">
@@ -41,59 +47,75 @@ const Header: React.FC = () => {
               </h1>
               {/* Subtext intentionally removed from Hero; kept hidden here */}
             </div>
-          </div>
-          
+          </motion.div>
+
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <motion.a
                 key={item.name}
                 href={item.href}
                 className="text-gray-300 hover:text-white transition-colors relative group"
+                whileHover={{ y: -2 }}
               >
                 {item.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              </motion.a>
             ))}
             <Button variant="primary" size="sm">
               Join Team
             </Button>
           </div>
-          
+
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="lg:hidden text-white p-2"
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <span className="text-2xl">✕</span> : <span className="text-2xl">☰</span>}
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </nav>
-      
+
       {/* Mobile Menu */}
+      <AnimatePresence>
         {isMenuOpen && (
-        <div className="lg:hidden bg-black bg-opacity-98 backdrop-blur-md border-t border-red-600 border-opacity-20">
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-black bg-opacity-98 backdrop-blur-md border-t border-red-600 border-opacity-20"
+          >
             <div className="px-4 py-6 space-y-4">
-            {navItems.map((item) => (
-              <a
+              {navItems.map((item, index) => (
+                <motion.a
                   key={item.name}
                   href={item.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
                   className="block text-gray-300 hover:text-white transition-colors py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
-              </a>
+                </motion.a>
               ))}
-            <div className="pt-4">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navItems.length * 0.1 }}
+                className="pt-4"
+              >
                 <Button variant="primary" className="w-full">
                   Join Team
                 </Button>
+              </motion.div>
             </div>
-          </div>
-        </div>
+          </motion.div>
         )}
-    </header>
+      </AnimatePresence>
+    </motion.header>
   );
 };
 

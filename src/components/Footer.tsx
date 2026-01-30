@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Instagram, Twitter, Youtube, ArrowRight } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -18,6 +19,24 @@ const Footer: React.FC = () => {
     Legal: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'GDPR']
   };
 
+  const socialLinks = [
+    {
+      label: 'Instagram',
+      href: 'https://www.instagram.com/autobotz_esports?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+      icon: Instagram
+    },
+    {
+      label: 'Twitter',
+      href: 'https://twitter.com/autobotzesports',
+      icon: Twitter
+    },
+    {
+      label: 'YouTube',
+      href: 'https://youtube.com/@autobotzesports',
+      icon: Youtube
+    }
+  ];
+
   return (
     <footer id="footer" className="relative bg-black border-t-4 border-red-600 overflow-hidden">
       {/* Background Effects */}
@@ -32,15 +51,15 @@ const Footer: React.FC = () => {
           {/* Brand Section */}
           <div>
             <div className="mb-6">
-              <img 
-                src="/images/logos/Abz Logo Red.png" 
-                alt="ABZ ESPORTS Logo" 
+              <img
+                src="/images/logos/Abz Logo Red.png"
+                alt="AUTOBOTZ ESPORTS Logo"
                 className="w-16 h-16 object-contain"
               />
             </div>
-            
+
             <p className="text-gray-400 mb-6 text-sm">
-              Building the future of esports through professional team management, 
+              Building the future of esports through professional team management,
               content creation, and competitive excellence across all gaming platforms.
             </p>
 
@@ -53,27 +72,25 @@ const Footer: React.FC = () => {
                 <span>+91 XXXX-XXXX-XX</span>
               </div>
             </div>
-            
+
             {/* Social Links */}
-            {/* <div className="flex items-center space-x-3">
-              {[
-                { label: 'YouTube', href: '#', icon: '▶' },
-                { label: 'Twitter', href: '#', icon: '🐦' },
-                { label: 'Instagram', href: '#', icon: '📷' },
-                { label: 'Discord', href: '#', icon: '💬' }
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  className="w-10 h-10 bg-gray-900 border-l-4 border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-600 transition-all"
-                  aria-label={social.label}
-                >
-                  <span className="text-lg">{social.icon}</span>
-                </a>
-              ))}
-            </div> */}
+            <div className="flex items-center space-x-3">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    className="w-10 h-10 bg-gray-900 border-l-4 border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-600 transition-all"
+                    aria-label={social.label}
+                  >
+                    <Icon size={18} />
+                  </a>
+                );
+              })}
+            </div>
           </div>
-          
+
           {/* Links Grid */}
           <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-8">
             {Object.entries(footerLinks).map(([category, links]) => (
@@ -104,7 +121,7 @@ const Footer: React.FC = () => {
               </h3>
               <p className="text-gray-400 text-sm">Get exclusive updates and tournament news</p>
             </div>
-            
+
             <form onSubmit={handleNewsletterSubmit} className="flex gap-3">
               <div className="flex-1 relative">
                 <input
@@ -121,19 +138,19 @@ const Footer: React.FC = () => {
                 className="bg-red-600 text-white font-bold px-8 py-3 uppercase hover:bg-red-700 transition-colors border-l-4 border-red-400 flex items-center gap-2"
               >
                 SUBSCRIBE
-                <span className="text-lg">→</span>
+                <ArrowRight size={18} />
               </button>
             </form>
           </div>
         </div>
-        
+
         {/* Bottom Bar */}
         <div className="border-t-2 border-gray-800 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
             <div className="text-gray-500">
-              © 2025 Autobotz Esports. All rights reserved.
+              © 2026 AUTOBOTZ ESPORTS. All rights reserved.
             </div>
-            
+
             <div className="flex items-center space-x-6">
               <a href="#" className="text-gray-500 hover:text-red-400 transition-colors">
                 Privacy Policy

@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { gsap } from '../animations/gsap';
+import { prefersReducedMotion } from '../animations/prefs';
 
 export class HeroScene {
   private scene: THREE.Scene;
@@ -7,8 +9,13 @@ export class HeroScene {
   private particles: THREE.Points;
   private logo: THREE.Mesh;
   private animationFrameId: number | null = null;
+  private mouse = { x: 0, y: 0 };
+  private targetRotation = { x: 0, y: 0 };
+  private isReduced: boolean;
+  private timeline: gsap.core.Timeline | null = null;
 
   constructor(container: HTMLElement) {
+    this.isReduced = prefersReducedMotion();
 
     // Scene setup
     this.scene = new THREE.Scene();
@@ -26,7 +33,7 @@ export class HeroScene {
     // Renderer
     this.renderer = new THREE.WebGLRenderer({
       alpha: true,
-      antialias: true,
+      antialias: !this.isReduced,
       powerPreference: 'high-performance',
     });
     this.renderer.setSize(container.clientWidth, container.clientHeight);
@@ -45,22 +52,28 @@ export class HeroScene {
     // Add lights
     this.addLights();
 
+    // Setup event listeners
+    if (!this.isReduced) {
+      this.setupMouseTracking();
+      this.setupIntroAnimation();
+    }
+
     // Handle resize
     window.addEventListener('resize', this.handleResize);
 
-    // Start render loop
+    // Start animation loop
     this.animate();
   }
 
   private createParticles(): THREE.Points {
-    const particleCount = 2000;
+    const particleCount = this.isReduced ? 500 : 2000;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
 
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3;
-      
+
       // Position
       positions[i3] = (Math.random() - 0.5) * 200;
       positions[i3 + 1] = (Math.random() - 0.5) * 200;
@@ -77,7 +90,7 @@ export class HeroScene {
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 0.8,
+      size: this.isReduced ? 0.5 : 0.8,
       vertexColors: true,
       transparent: true,
       opacity: 0.8,
@@ -89,7 +102,7 @@ export class HeroScene {
   }
 
   private createLogo(): THREE.Mesh {
-    // Create a stylized "ABZ" shape using geometry
+    // Create a stylized "AUTOBOTZ" shape using geometry
     const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
     const material = new THREE.MeshPhongMaterial({
       color: 0xC8102E,
@@ -121,6 +134,52 @@ export class HeroScene {
     this.scene.add(pointLight2);
   }
 
+  private setupMouseTracking(): void {
+    document.addEventListener('mousemove', this.handleMouseMove);
+  }
+
+  private handleMouseMove = (event: MouseEvent): void => {
+    this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  };
+
+  private setupIntroAnimation(): void {
+    // Intro animation using GSAP
+    this.timeline = gsap.timeline({ defaults: { ease: 'power2.out' } });
+
+    this.timeline
+      .from(this.camera.position, {
+        z: 100,
+        duration: 2,
+      })
+      .from(
+        this.logo.rotation,
+        {
+          x: Math.PI * 2,
+          y: Math.PI * 2,
+          duration: 2,
+        },
+        '<'
+      )
+      .from(
+        this.logo.scale,
+        {
+          x: 0,
+          y: 0,
+          z: 0,
+          duration: 1.5,
+        },
+        '<0.5'
+      );
+
+    // Yoyo rotation animation
+    gsap.to(this.logo.rotation, {
+      y: Math.PI * 2,
+      duration: 20,
+      repeat: -1,
+      ease: 'none',
+    });
+  }
 
   private handleResize = (): void => {
     const container = this.renderer.domElement.parentElement;
@@ -133,13 +192,35 @@ export class HeroScene {
 
   private animate = (): void => {
     this.animationFrameId = requestAnimationFrame(this.animate);
+
+    if (!this.isReduced) {
+      // Smooth mouse parallax
+      this.targetRotation.x += (this.mouse.y * 0.1 - this.targetRotation.x) * 0.05;
+      this.targetRotation.y += (this.mouse.x * 0.1 - this.targetRotation.y) * 0.05;
+
+      this.particles.rotation.x += (this.targetRotation.x - this.particles.rotation.x) * 0.1;
+      this.particles.rotation.y += (this.targetRotation.y - this.particles.rotation.y) * 0.1;
+
+      // Animate particles
+      const positions = this.particles.geometry.attributes.position.array as Float32Array;
+      for (let i = 0; i < positions.length; i += 3) {
+        positions[i + 1] += Math.sin(Date.now() * 0.001 + i) * 0.02;
+      }
+      this.particles.geometry.attributes.position.needsUpdate = true;
+
+      // Subtle logo movement
+      this.logo.position.y = Math.sin(Date.now() * 0.001) * 2;
+    }
+
     this.renderer.render(this.scene, this.camera);
   };
 
   /**
-   * Update camera on scroll
+   * Animate camera on scroll
    */
   public animateScroll(progress: number): void {
+    if (this.isReduced) return;
+
     // Dolly camera backward on scroll
     this.camera.position.z = 50 + progress * 30;
     this.logo.rotation.z = progress * Math.PI;
@@ -149,13 +230,17 @@ export class HeroScene {
    * Cleanup and dispose
    */
   public destroy(): void {
-    // Stop render loop
+    // Stop animation
     if (this.animationFrameId !== null) {
       cancelAnimationFrame(this.animationFrameId);
     }
 
+    // Kill GSAP animations
+    this.timeline?.kill();
+
     // Remove event listeners
     window.removeEventListener('resize', this.handleResize);
+    document.removeEventListener('mousemove', this.handleMouseMove);
 
     // Dispose Three.js resources
     this.particles.geometry.dispose();

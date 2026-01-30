@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { Filter, Search } from 'lucide-react';
 
 interface FiltersProps {
   searchTerm: string;
@@ -21,12 +23,16 @@ const Filters: React.FC<FiltersProps> = ({
   const ranks = ['All', 'Conqueror', 'Ace Master', 'Ace', 'Crown', 'Diamond'];
 
   return (
-    <div className="bg-gray-900 rounded-2xl p-6 mb-8 border border-gray-800">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-gray-900 rounded-2xl p-6 mb-8 border border-gray-800"
+    >
       <div className="flex items-center space-x-2 mb-4">
         <Filter className="w-5 h-5 text-red-600" />
         <h3 className="text-lg font-semibold text-white">Filters</h3>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Search */}
         <div className="relative">
@@ -39,7 +45,7 @@ const Filters: React.FC<FiltersProps> = ({
             className="w-full bg-gray-800 border border-gray-700 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-red-600 transition-colors"
           />
         </div>
-        
+
         {/* Role Filter */}
         <select
           value={roleFilter}
@@ -52,7 +58,7 @@ const Filters: React.FC<FiltersProps> = ({
             </option>
           ))}
         </select>
-        
+
         {/* Rank Filter */}
         <select
           value={rankFilter}
@@ -66,7 +72,7 @@ const Filters: React.FC<FiltersProps> = ({
           ))}
         </select>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

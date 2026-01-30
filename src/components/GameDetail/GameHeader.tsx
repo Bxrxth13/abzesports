@@ -1,4 +1,6 @@
 import React from 'react';
+import { ArrowLeft, Users, Trophy } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Button from '../shared/Button';
 import { Game } from '../../data/sampleData';
 
@@ -16,26 +18,33 @@ const GameHeader: React.FC<GameHeaderProps> = ({ game, onBack }) => {
         style={{ backgroundImage: `url(${game.image})` }}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/50" />
-      
+
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Back Button */}
-        <button
+        <motion.button
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
           onClick={onBack}
           className="flex items-center space-x-2 text-white hover:text-red-400 transition-colors mb-8"
         >
-          <span>← Back to Games</span>
-        </button>
-        
+          <ArrowLeft className="w-5 h-5" />
+          <span>Back to Games</span>
+        </motion.button>
+
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4">
               {game.title}
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl">
               {game.description}
             </p>
-            
+
             {/* Stats */}
             <div className="flex items-center space-x-8 mb-8">
               <div className="flex items-center space-x-2 text-gray-300">
@@ -47,17 +56,22 @@ const GameHeader: React.FC<GameHeaderProps> = ({ game, onBack }) => {
                 <span>{game.tournamentCount} Tournaments</span>
               </div>
             </div>
-          </div>
-          
+          </motion.div>
+
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="flex flex-col sm:flex-row gap-4"
+          >
             {<Button variant="primary" size="lg">
               Join Team
-            </Button> }
-            { <Button variant="secondary" size="lg">
+            </Button>}
+            {<Button variant="secondary" size="lg">
               Follow Creators
-            </Button> }
-          </div>
+            </Button>}
+          </motion.div>
         </div>
       </div>
     </section>
