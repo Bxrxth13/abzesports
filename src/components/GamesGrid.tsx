@@ -16,7 +16,7 @@ const GamesGrid: React.FC<GamesGridProps> = ({ onGameClick }) => {
             OUR <span className="text-red-600">GAMES</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            From battle royales to MOBAs, we dominate every arena. Join our elite teams 
+            From battle royales to MOBAs, we dominate every arena. Join our elite teams
             and compete at the highest level across multiple gaming platforms.
           </p>
         </AnimatedSection>
@@ -33,7 +33,7 @@ const GamesGrid: React.FC<GamesGridProps> = ({ onGameClick }) => {
           ))}
         </div>
 
-        <AnimatedSection delay={0.6} className="text-center mt-16">
+        <AnimatedSection className="text-center mt-16">
           <div className="inline-block">
             <button className="bg-gradient-to-r from-red-600 to-red-800 text-white font-bold py-4 px-8 rounded-full hover:from-red-700 hover:to-red-900 transition-all duration-300 shadow-lg hover:shadow-red-600/25">
               Explore All Teams

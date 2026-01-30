@@ -3,11 +3,10 @@ import { Player } from '../../data/sampleData';
 
 interface PlayerCardProps {
   player: Player;
-  index: number;
   onClick: () => void;
 }
 
-const PlayerCard: React.FC<PlayerCardProps> = ({ player, index, onClick }) => {
+const PlayerCard: React.FC<PlayerCardProps> = ({ player, onClick }) => {
   const getSocialIcon = (platform: string) => {
     switch (platform) {
       case 'youtube': return '▶️';

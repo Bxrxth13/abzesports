@@ -21,7 +21,7 @@ const GamePage: React.FC<GamePageProps> = ({ gameSlug, onBack }) => {
   const [selectedCreator, setSelectedCreator] = useState<Creator | null>(null);
 
   const game = games.find(g => g.slug === gameSlug);
-  
+
   if (!game) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
@@ -41,11 +41,11 @@ const GamePage: React.FC<GamePageProps> = ({ gameSlug, onBack }) => {
   const filteredPlayers = useMemo(() => {
     return players.filter(player => {
       const matchesSearch = player.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          player.handle.toLowerCase().includes(searchTerm.toLowerCase());
+        player.handle.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesRole = roleFilter === 'All' || player.role === roleFilter;
       const matchesRank = rankFilter === 'All' || player.rank === rankFilter;
       const matchesGame = player.game === game.title;
-      
+
       return matchesSearch && matchesRole && matchesRank && matchesGame;
     });
   }, [searchTerm, roleFilter, rankFilter, game.title]);
@@ -53,9 +53,9 @@ const GamePage: React.FC<GamePageProps> = ({ gameSlug, onBack }) => {
   const filteredCreators = useMemo(() => {
     return creators.filter(creator => {
       const matchesSearch = creator.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          creator.handle.toLowerCase().includes(searchTerm.toLowerCase());
+        creator.handle.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesGame = creator.game === game.title;
-      
+
       return matchesSearch && matchesGame;
     });
   }, [searchTerm, game.title]);
@@ -63,11 +63,11 @@ const GamePage: React.FC<GamePageProps> = ({ gameSlug, onBack }) => {
   return (
     <div className="min-h-screen bg-black">
       <GameHeader game={game} onBack={onBack} />
-      
+
       <section className="py-[var(--sec-y-mobile)] md:py-[var(--sec-y-tablet)] lg:py-[var(--sec-y-desktop)] bg-gradient-to-b from-black to-gray-900">
         <div className="container-safe">
           <TabSwitcher activeTab={activeTab} onTabChange={setActiveTab} />
-          
+
           {activeTab === 'players' && (
             <Filters
               searchTerm={searchTerm}
@@ -78,14 +78,13 @@ const GamePage: React.FC<GamePageProps> = ({ gameSlug, onBack }) => {
               onRankChange={setRankFilter}
             />
           )}
-          
+
           {activeTab === 'players' ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 auto-rows-auto">
-              {filteredPlayers.map((player, index) => (
+              {filteredPlayers.map((player) => (
                 <PlayerCard
                   key={player.id}
                   player={player}
-                  index={index}
                   onClick={() => setSelectedPlayer(player)}
                 />
               ))}
@@ -102,15 +101,15 @@ const GamePage: React.FC<GamePageProps> = ({ gameSlug, onBack }) => {
               ))}
             </div>
           )}
-          
+
           {((activeTab === 'players' && filteredPlayers.length === 0) ||
             (activeTab === 'creators' && filteredCreators.length === 0)) && (
-            <div className="text-center py-16">
-              <p className="text-gray-400 text-xl">
-                No {activeTab} found matching your criteria.
-              </p>
-            </div>
-          )}
+              <div className="text-center py-16">
+                <p className="text-gray-400 text-xl">
+                  No {activeTab} found matching your criteria.
+                </p>
+              </div>
+            )}
         </div>
       </section>
 
@@ -141,7 +140,7 @@ const GamePage: React.FC<GamePageProps> = ({ gameSlug, onBack }) => {
                 </div>
               </div>
             </div>
-            
+
             <div className="grid grid-cols-3 gap-4 bg-gray-800 rounded-lg p-4">
               <div className="text-center">
                 <div className="text-2xl font-bold text-white">{selectedPlayer.stats.winRate}</div>
@@ -156,12 +155,12 @@ const GamePage: React.FC<GamePageProps> = ({ gameSlug, onBack }) => {
                 <div className="text-gray-400 text-sm">Matches</div>
               </div>
             </div>
-            
+
             <div>
               <h4 className="text-white font-semibold">Bio</h4>
               <p className="text-gray-300">{selectedPlayer.bio}</p>
             </div>
-            
+
             <div className="flex space-x-4">
               {Object.entries(selectedPlayer.socials).map(([platform, url]) => {
                 if (!url) return null;
@@ -202,7 +201,7 @@ const GamePage: React.FC<GamePageProps> = ({ gameSlug, onBack }) => {
                 <p className="text-gray-400">{selectedCreator.subscribers} subscribers</p>
               </div>
             </div>
-            
+
             <div className="bg-gray-800 rounded-lg p-4">
               <h4 className="text-white font-semibold">Latest Video</h4>
               <div className="aspect-video rounded-lg overflow-hidden mb-3">
@@ -215,7 +214,7 @@ const GamePage: React.FC<GamePageProps> = ({ gameSlug, onBack }) => {
               <h5 className="text-white font-medium">{selectedCreator.latestVideo.title}</h5>
               <p className="text-gray-400 text-sm">{selectedCreator.latestVideo.views} views</p>
             </div>
-            
+
             <div className="flex space-x-4">
               {Object.entries(selectedCreator.socials).map(([platform, url]) => {
                 if (!url) return null;
