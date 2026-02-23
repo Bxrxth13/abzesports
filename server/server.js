@@ -54,7 +54,7 @@ app.post('/api/consultation', async (req, res) => {
         // 1. Prepare Admin Email
         const adminMailOptions = {
             from: `"${name}" <${process.env.EMAIL_USER}>`,
-            to: 'autobotzesports@gmail.com', // Admin Email
+            to: 'barathwaajvs123@gmail.com', // Admin Email
             subject: `New Registration: ${name}`,
             html: getAdminTemplate(submissionData),
             replyTo: email
