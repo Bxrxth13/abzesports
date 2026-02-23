@@ -5,6 +5,7 @@ import { useSmartHeader } from './hooks/useSmartHeader';
 import PageLayout from './layout/PageLayout';
 import { AnimatedCounter } from './components/AnimatedCounter';
 import Modal from './components/Modal';
+import ClickSpark from './components/ClickSpark';
 
 // Header Component - Sticky only to Hero section with GSAP effects
 const Header = ({ heroEl }: { heroEl: HTMLElement | null }) => {
@@ -997,6 +998,16 @@ function App() {
 
   return (
     <div className="min-h-[100svh] bg-black text-white overflow-x-hidden" style={{ backgroundColor: '#000000' }}>
+      {/* Global Click Spark Effect */}
+      <ClickSpark
+        sparkColor="#ff0000"
+        sparkSize={4}
+        sparkRadius={7}
+        sparkCount={6}
+        duration={250}
+        easing="ease-out"
+        extraScale={1}
+      />
       <PageLayout
         header={<Header heroEl={heroEl} />}
         footer={

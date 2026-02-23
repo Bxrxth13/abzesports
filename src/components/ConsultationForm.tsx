@@ -5,6 +5,7 @@ import AnimatedSection from './shared/AnimatedSection';
 interface FormData {
   name: string;
   email: string;
+  phone: string;
   organization: string;
   gameInterest: string;
   serviceType: string;
@@ -18,6 +19,7 @@ const ConsultationForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
+    phone: '',
     organization: '',
     gameInterest: '',
     serviceType: '',
@@ -28,6 +30,7 @@ const ConsultationForm: React.FC = () => {
   });
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Partial<FormData>>({});
 
   const gameOptions = ['BGMI', 'Free Fire', 'Pokémon Unite', 'Indus', 'Other'];
@@ -52,6 +55,7 @@ const ConsultationForm: React.FC = () => {
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.email.trim()) newErrors.email = 'Email is required';
     if (!formData.email.includes('@')) newErrors.email = 'Valid email is required';
+    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
     if (!formData.gameInterest) newErrors.gameInterest = 'Game interest is required';
     if (!formData.serviceType) newErrors.serviceType = 'Service type is required';
     if (!formData.message.trim()) newErrors.message = 'Message is required';
@@ -61,12 +65,32 @@ const ConsultationForm: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      // Handle form submission
-      console.log('Form submitted:', formData, uploadedFile);
-      setIsSubmitted(true);
+      setIsSubmitting(true);
+      try {
+        const response = await fetch('http://localhost:3000/api/consultation', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          setIsSubmitted(true);
+        } else {
+          alert(result.message || 'Submission failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Failed to connect to the server. Please check your connection.');
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -92,15 +116,15 @@ const ConsultationForm: React.FC = () => {
             <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-8 text-5xl">
               ✓
             </div>
-            
+
             <h2 className="text-4xl font-bold text-white mb-4">
               Consultation Request Submitted!
             </h2>
             <p className="text-xl text-gray-400 mb-8">
-              Thank you for your interest in working with Autobotz. 
+              Thank you for your interest in working with Autobotz.
               We'll review your request and get back to you within 24 hours.
             </p>
-            
+
             <div className="bg-gray-800 rounded-lg p-6 mb-8">
               <h3 className="text-white font-semibold">What's Next?</h3>
               <div className="space-y-3 text-gray-300">
@@ -118,10 +142,10 @@ const ConsultationForm: React.FC = () => {
                 </div>
               </div>
             </div>
-            
-            <Button 
-              variant="primary" 
-              size="lg" 
+
+            <Button
+              variant="primary"
+              size="lg"
               onClick={() => setIsSubmitted(false)}
             >
               Submit Another Request
@@ -140,10 +164,10 @@ const ConsultationForm: React.FC = () => {
             BOOK A <span className="text-red-600">CONSULTATION</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Ready to take your esports journey to the next level? Let's discuss how 
+            Ready to take your esports journey to the next level? Let's discuss how
             Autobotz can help you achieve your gaming goals.
           </p>
-          
+
           {/* Trust Indicators */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             {[
@@ -184,7 +208,7 @@ const ConsultationForm: React.FC = () => {
               />
               {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
             </div>
-            
+
             <div>
               <label className="block text-white font-semibold mb-2">
                 Email Address *
@@ -200,17 +224,33 @@ const ConsultationForm: React.FC = () => {
             </div>
           </div>
 
-          <div className="mb-6">
-            <label className="block text-white font-semibold mb-2">
-              Organization/Team Name
-            </label>
-            <input
-              type="text"
-              value={formData.organization}
-              onChange={(e) => handleInputChange('organization', e.target.value)}
-              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-red-600 transition-colors"
-              placeholder="Your organization or team name (optional)"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label className="block text-white font-semibold mb-2">
+                Phone Number *
+              </label>
+              <input
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => handleInputChange('phone', e.target.value)}
+                className={`w-full bg-gray-800 border ${errors.phone ? 'border-red-500' : 'border-gray-700'} rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-red-600 transition-colors`}
+                placeholder="+1 (555) 000-0000"
+              />
+              {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+            </div>
+
+            <div>
+              <label className="block text-white font-semibold mb-2">
+                Organization/Team Name
+              </label>
+              <input
+                type="text"
+                value={formData.organization}
+                onChange={(e) => handleInputChange('organization', e.target.value)}
+                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-red-600 transition-colors"
+                placeholder="Your organization or team name (optional)"
+              />
+            </div>
           </div>
 
           {/* Service Details */}
@@ -233,7 +273,7 @@ const ConsultationForm: React.FC = () => {
               </select>
               {errors.gameInterest && <p className="text-red-500 text-sm mt-1">{errors.gameInterest}</p>}
             </div>
-            
+
             <div>
               <label className="block text-white font-semibold mb-2">
                 Service Type *
@@ -321,7 +361,7 @@ const ConsultationForm: React.FC = () => {
               />
               {errors.preferredDate && <p className="text-red-500 text-sm mt-1">{errors.preferredDate}</p>}
             </div>
-            
+
             <div>
               <label className="block text-white font-semibold mb-2">
                 Preferred Time
@@ -346,11 +386,10 @@ const ConsultationForm: React.FC = () => {
                   key={type.id}
                   type="button"
                   onClick={() => handleInputChange('meetingType', type.id)}
-                  className={`flex items-center justify-center space-x-3 p-4 rounded-lg border-2 transition-colors ${
-                    formData.meetingType === type.id
+                  className={`flex items-center justify-center space-x-3 p-4 rounded-lg border-2 transition-colors ${formData.meetingType === type.id
                       ? 'border-red-600 bg-red-600/10 text-white'
                       : 'border-gray-700 text-gray-400 hover:border-gray-600'
-                  }`}
+                    }`}
                 >
                   <span className="text-xl">{type.icon}</span>
                   <span>{type.label}</span>
@@ -366,8 +405,9 @@ const ConsultationForm: React.FC = () => {
               variant="primary"
               size="lg"
               className="w-full md:w-auto px-12"
+              disabled={isSubmitting}
             >
-              Schedule Consultation
+              {isSubmitting ? 'Sending...' : 'Schedule Consultation'}
             </Button>
           </div>
         </form>

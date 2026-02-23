@@ -2,6 +2,7 @@ import express from 'express';
 import nodemailer from 'nodemailer';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { getAdminTemplate, getUserTemplate } from './emailTemplates.js';
 
 dotenv.config();
 
@@ -16,8 +17,8 @@ app.use(express.json());
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.EMAIL_USER, // Your Gmail address
-        pass: process.env.EMAIL_PASS  // Your App Password (not Google password)
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
 
@@ -32,64 +33,53 @@ transporter.verify(function (error, success) {
 });
 
 app.post('/api/consultation', async (req, res) => {
-    const { name, email, gameInterest, message } = req.body;
+    const { name, email, phone, gameInterest, message, organization, serviceType, preferredDate } = req.body;
 
     if (!email || !name) {
         return res.status(400).json({ success: false, message: 'Name and Email are required.' });
     }
 
-    const consultationData = {
-        name,
-        email,
-        phone: 'Not provided',
-        consultationType: gameInterest || 'General Inquiry',
-        selectedPattern: 'N/A',
-        preferredDate: new Date().toISOString().split('T')[0],
-        message: message || 'No message provided'
-    };
-
-    const emailConfig = {
-        brandName: 'Autobotz Esports',
-        websiteUrl: 'https://autobotzesports.com',
-        contactEmail: 'autobotzesports@gmail.com'
+    const submissionData = {
+        Name: name,
+        Email: email,
+        Phone: phone || 'Not provided',
+        'Game Interest': gameInterest || 'General',
+        'Service Type': serviceType || 'Not specified',
+        'Organization': organization || 'N/A',
+        'Preferred Date': preferredDate || 'N/A',
+        Message: message || 'No message provided'
     };
 
     try {
-        // 1. Send Admin Notification
+        // 1. Prepare Admin Email
         const adminMailOptions = {
             from: `"${name}" <${process.env.EMAIL_USER}>`,
-            to: 'autobotzesports@gmail.com', // The admin email
-            subject: `New Inquiry: ${consultationData.consultationType} from ${name}`,
-            text: `New Inquiry Received:\n\nName: ${name}\nEmail: ${email}\nGame/Interest: ${consultationData.consultationType}\nMessage: ${consultationData.message}\n\nSubmitted on: ${new Date().toLocaleString()}`,
+            to: 'autobotzesports@gmail.com', // Admin Email
+            subject: `New Registration: ${name}`,
+            html: getAdminTemplate(submissionData),
             replyTo: email
         };
 
-        // 2. Send User Confirmation
+        // 2. Prepare User Auto-Reply Email
         const userMailOptions = {
             from: `"Autobotz Esports" <${process.env.EMAIL_USER}>`,
             to: email,
-            subject: 'Mission Acknowledged - Autobotz Esports',
-            text: `Hi ${name},\n\nThank you for reaching out to Autobotz Esports regarding ${consultationData.consultationType}.\n\nWe have received your message:\n"${consultationData.message}"\n\nOur team will review your inquiry and get back to you shortly.\n\nGame On,\nAutobotz Esports Team`
+            subject: 'Congratulations! Welcome to Autobotz Esports',
+            html: getUserTemplate(name)
         };
 
-        // Send emails
-        // We try to send both. Even if delivery fails, we return success to the user 
-        // to avoid disruptive error messages in the UI.
-        try {
-            await transporter.sendMail(adminMailOptions);
-            await transporter.sendMail(userMailOptions);
-            console.log(`Emails sent successfully for ${email}`);
-        } catch (mailError) {
-            console.error('Email delivery failed internally:', mailError.message);
-            // We do NOT stop here; we still return 200 to the frontend
-        }
+        // 3. Send Emails in Parallel
+        const sendAdmin = transporter.sendMail(adminMailOptions);
+        const sendUser = transporter.sendMail(userMailOptions);
 
-        res.status(200).json({ success: true, message: 'Message received by HQ!' });
+        await Promise.all([sendAdmin, sendUser]);
+
+        console.log(`Emails sent successfully for ${email}`);
+        res.status(200).json({ success: true, message: 'Registration successful! Check your email.' });
 
     } catch (error) {
-        console.error('API processing error:', error);
-        // This only hits if the code logic crashes (e.g. database error)
-        res.status(200).json({ success: true, message: 'Transmission Received' });
+        console.error('Email processing error:', error);
+        res.status(500).json({ success: false, message: 'Failed to process registration.' });
     }
 });
 
