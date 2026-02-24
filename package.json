@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@motionone/dom": "^10.18.0",
-    "@motionone/react": "^10.16.4",
     "@supabase/supabase-js": "^2.57.4",
     "@types/react-router-dom": "^5.3.3",
     "animejs": "^4.2.2",
