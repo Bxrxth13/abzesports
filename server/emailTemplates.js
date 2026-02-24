@@ -30,6 +30,10 @@ const createEmailTemplate = (title, contentLines) => `
       text-align: center;
       border-bottom: 1px solid #1a1a1a;
     }
+    .header img {
+      width: 120px;
+      margin-bottom: 15px;
+    }
     .header h1 {
       color: #ffffff;
       margin: 0;
@@ -128,6 +132,7 @@ const createEmailTemplate = (title, contentLines) => `
   <div class="wrapper">
     <div class="container">
       <div class="header">
+        <img src="cid:logo" alt="Autobotz Esports Logo" />
         <h1>Autobotz Esports</h1>
       </div>
       <div class="content">
@@ -170,7 +175,7 @@ export const getUserTemplate = (name) => {
   return createEmailTemplate(
     'Welcome',
     `
-      <h2 style="text-align: center; border-left: none; padding-left: 0; font-size: 28px;">Welcome to the Squad 🎮🔥</h2>
+      <h2 style="text-align: center; border-left: none; padding-left: 0; font-size: 28px;">ABz Welcomes your interest 🎮🔥</h2>
       <p style="text-align: center; font-size: 18px; line-height: 1.8;">Thank you for registering with <span class="highlight">Autobotz Esports</span>.</p>
       <p style="text-align: center; font-size: 16px;">We have successfully received your details and our team is on it.</p>
       

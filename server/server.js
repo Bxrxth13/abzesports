@@ -2,9 +2,14 @@ import express from 'express';
 import nodemailer from 'nodemailer';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { getAdminTemplate, getUserTemplate } from './emailTemplates.js';
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,7 +20,9 @@ app.use(express.json());
 
 // Email Configuration
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // Use SSL
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -51,13 +58,20 @@ app.post('/api/consultation', async (req, res) => {
     };
 
     try {
+        const logoPath = path.join(__dirname, '../dist/images/logos/Abz Logo Red.png');
+
         // 1. Prepare Admin Email
         const adminMailOptions = {
             from: `"${name}" <${process.env.EMAIL_USER}>`,
             to: 'barathwaajvs123@gmail.com', // Admin Email
             subject: `New Registration: ${name}`,
             html: getAdminTemplate(submissionData),
-            replyTo: email
+            replyTo: email,
+            attachments: [{
+                filename: 'Abz Logo Red.png',
+                path: logoPath,
+                cid: 'logo'
+            }]
         };
 
         // 2. Prepare User Auto-Reply Email
@@ -65,14 +79,17 @@ app.post('/api/consultation', async (req, res) => {
             from: `"Autobotz Esports" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: 'Congratulations! Welcome to Autobotz Esports',
-            html: getUserTemplate(name)
+            html: getUserTemplate(name),
+            attachments: [{
+                filename: 'Abz Logo Red.png',
+                path: logoPath,
+                cid: 'logo'
+            }]
         };
 
-        // 3. Send Emails in Parallel
-        const sendAdmin = transporter.sendMail(adminMailOptions);
-        const sendUser = transporter.sendMail(userMailOptions);
-
-        await Promise.all([sendAdmin, sendUser]);
+        // 3. Send Emails Sequentially to avoid TLS concurrent socket collisions
+        await transporter.sendMail(adminMailOptions);
+        await transporter.sendMail(userMailOptions);
 
         console.log(`Emails sent successfully for ${email}`);
         res.status(200).json({ success: true, message: 'Registration successful! Check your email.' });

@@ -807,10 +807,19 @@ const FoundersPage = () => {
 };
 
 // Consultation Page Component
+interface ConsultationFormData {
+  name: string;
+  email: string;
+  phone: number;
+  gameInterest: string;
+  message: string;
+}
+
 const ConsultationPage = ({ onShowModal }: { onShowModal: (title: string, message: string) => void }) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ConsultationFormData>({
     name: '',
     email: '',
+    phone: 0,
     gameInterest: '',
     message: ''
   });
@@ -834,7 +843,7 @@ const ConsultationPage = ({ onShowModal }: { onShowModal: (title: string, messag
 
       if (data.success) {
         onShowModal('Mission Acknowledged', 'Thank you for your inquiry! Check your email for confirmation. We will get back to you within 24 hours.');
-        setFormData({ name: '', email: '', gameInterest: '', message: '' });
+        setFormData({ name: '', email: '', phone: 0, gameInterest: '', message: '' });
       } else {
         onShowModal('Communication Error', data.message || 'Something went wrong. Please try again later.');
       }
@@ -899,9 +908,15 @@ const ConsultationPage = ({ onShowModal }: { onShowModal: (title: string, messag
                     <input
                       type="text"
                       value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      onChange={(e) => {
+                        const lettersOnly = e.target.value.replace(/[^A-Za-z\s]/g, '');
+                        setFormData({ ...formData, name: lettersOnly });
+                      }}
                       className="w-full bg-black/50 border-l-4 border-red-600 border-r border-t border-b border-gray-700 px-4 sm:px-5 py-3.5 sm:py-4 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 focus:shadow-[0_0_20px_rgba(220,38,38,0.3)] transition-all duration-300 font-medium rounded"
                       placeholder="FULL NAME *"
+                      pattern="[A-Za-z\s]+"
+                      title="Name should only contain letters and spaces"
+                      maxLength={50}
                       required
                     />
                     <div className="absolute inset-0 bg-red-600/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
@@ -914,26 +929,51 @@ const ConsultationPage = ({ onShowModal }: { onShowModal: (title: string, messag
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-black/50 border-l-4 border-red-600 border-r border-t border-b border-gray-700 px-4 sm:px-5 py-3.5 sm:py-4 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 focus:shadow-[0_0_20px_rgba(220,38,38,0.3)] transition-all duration-300 font-medium rounded"
                       placeholder="EMAIL ADDRESS *"
+                      maxLength={100}
                       required
                     />
                     <div className="absolute inset-0 bg-red-600/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
                   </div>
                 </div>
 
-                <div className="relative group mb-4 sm:mb-5">
-                  <select
-                    value={formData.gameInterest}
-                    onChange={(e) => setFormData({ ...formData, gameInterest: e.target.value })}
-                    className="w-full bg-black/50 border-l-4 border-red-600 border-r border-t border-b border-gray-700 px-4 sm:px-5 py-3.5 sm:py-4 text-white focus:outline-none focus:border-red-500 focus:shadow-[0_0_20px_rgba(220,38,38,0.3)] transition-all duration-300 font-medium uppercase text-sm rounded"
-                    required
-                  >
-                    <option value="">GAME OF INTEREST</option>
-                    <option value="BGMI">BGMI</option>
-                    <option value="Free Fire">FREE FIRE</option>
-                    <option value="Pokémon Unite">POKÉMON UNITE</option>
-                    <option value="Indus">INDUS</option>
-                  </select>
-                  <div className="absolute inset-0 bg-red-600/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 mb-4 sm:mb-5">
+                  <div className="relative group">
+                    <input
+                      type="tel"
+                      value={formData.phone || ''}
+                      onChange={(e) => {
+                        const digitsOnly = e.target.value.replace(/\D/g, '');
+                        setFormData({ ...formData, phone: digitsOnly ? parseInt(digitsOnly, 10) : 0 });
+                      }}
+                      className="w-full bg-black/50 border-l-4 border-red-600 border-r border-t border-b border-gray-700 px-4 sm:px-5 py-3.5 sm:py-4 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 focus:shadow-[0_0_20px_rgba(220,38,38,0.3)] transition-all duration-300 font-medium rounded"
+                      placeholder="MOBILE NUMBER *"
+                      pattern="^[0-9]{10}$"
+                      title="Please enter exactly 10 digits for your mobile number"
+                      maxLength={10}
+                      required
+                    />
+                    <div className="absolute inset-0 bg-red-600/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                  </div>
+
+                  <div className="relative group">
+                    <select
+                      value={formData.gameInterest}
+                      onChange={(e) => setFormData({ ...formData, gameInterest: e.target.value })}
+                      className="w-full h-full bg-black/50 border-l-4 border-red-600 border-r border-t border-b border-gray-700 px-4 sm:px-5 py-3.5 sm:py-4 text-white focus:outline-none focus:border-red-500 focus:shadow-[0_0_20px_rgba(220,38,38,0.3)] transition-all duration-300 font-medium uppercase text-sm rounded appearance-none"
+                      required
+                    >
+                      <option value="">GAME OF INTEREST</option>
+                      <option value="BGMI">BGMI</option>
+                      <option value="Valorant">VALORANT</option>
+                      <option value="Free Fire">FREE FIRE</option>
+                      <option value="Pokémon Unite">POKÉMON UNITE</option>
+                      <option value="Indus">INDUS</option>
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-red-500">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                    </div>
+                    <div className="absolute inset-0 bg-red-600/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                  </div>
                 </div>
 
                 <div className="relative group mb-5">
@@ -941,8 +981,9 @@ const ConsultationPage = ({ onShowModal }: { onShowModal: (title: string, messag
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={6}
+                    maxLength={500}
                     className="w-full bg-black/50 border-l-4 border-red-600 border-r border-t border-b border-gray-700 px-4 sm:px-5 py-3.5 sm:py-4 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 focus:shadow-[0_0_20px_rgba(220,38,38,0.3)] transition-all duration-300 resize-none font-medium rounded"
-                    placeholder="LEAVE US A MESSAGE..."
+                    placeholder="LEAVE US A MESSAGE (Max 500 characters)..."
                     required
                   />
                   <div className="absolute inset-0 bg-red-600/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
