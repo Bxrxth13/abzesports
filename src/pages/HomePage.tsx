@@ -52,7 +52,7 @@ const CustomCursor = () => {
 };
 
 // Header Component - Stealth Navbar
-const Header = ({ heroEl }: { heroEl: HTMLElement | null }) => {
+const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -81,7 +81,7 @@ const Header = ({ heroEl }: { heroEl: HTMLElement | null }) => {
             }}
             initial={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed top-0 left-0 right-0 z-50 pt-[env(safe-area-inset-top)] pointer-events-auto transition-all duration-300 bg-gradient-to-r from-red-950 via-[#1a0000] to-black border-b-[2px] border-red-700/70 shadow-[0_4px_30px_rgba(180,0,0,0.25)] backdrop-blur-sm"
+            className={`fixed top-0 left-0 right-0 z-50 pt-[env(safe-area-inset-top)] pointer-events-auto transition-all duration-300 ${isScrolled ? 'bg-gradient-to-r from-red-950 via-[#1a0000] to-black border-b-[2px] border-red-700/70 shadow-[0_4px_30px_rgba(180,0,0,0.25)] backdrop-blur-sm' : 'bg-transparent border-b-[2px] border-transparent'}`}
         >
             <nav className="container-safe">
                 <div className="flex items-center justify-between h-16 lg:h-20">
@@ -219,7 +219,7 @@ const Hero = ({ onShowModal }: { onShowModal?: (title: string, message: string) 
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.1 }}
                     >
-                        <h1 className="flex flex-col text-6xl sm:text-7xl md:text-8xl lg:text-[8rem] font-['Orbitron',sans-serif] leading-[0.8] tracking-tighter">
+                        <h1 className="flex flex-col text-6xl sm:text-7xl md:text-8xl lg:text-[8rem] font-['Orbitron',sans-serif] leading-[0.8]">
                             <span className="text-white font-black drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">AUTOBOTZ</span>
                             <span className="text-transparent relative group font-black -mt-2 lg:-mt-4 inline-block w-fit" style={{ WebkitTextStroke: '2px #DC143C' }}>
                                 ESPORTS
@@ -1141,18 +1141,12 @@ const ConsultationPage = ({ onShowModal }: { onShowModal: (title: string, messag
 };
 
 function HomePage() {
-    const [heroEl, setHeroEl] = useState<HTMLElement | null>(null);
     const [activePopup, setActivePopup] = useState<'privacy' | 'terms' | 'support' | null>(null);
     const [modal, setModal] = useState({ isOpen: false, title: '', message: '' });
 
     const showModal = (title: string, message: string) => {
         setModal({ isOpen: true, title, message });
     };
-
-    useEffect(() => {
-        const el = document.getElementById('hero') as HTMLElement | null;
-        setHeroEl(el);
-    }, []);
 
     const scrollToSection = (sectionId: string) => {
         console.log('Scrolling to:', sectionId); // Debug log
@@ -1180,7 +1174,7 @@ function HomePage() {
                 extraScale={1}
             />
             <PageLayout
-                header={<Header heroEl={heroEl} />}
+                header={<Header />}
                 footer={
                     <footer id="footer" className="relative overflow-hidden py-[var(--sec-y-mobile)] md:py-[var(--sec-y-tablet)] lg:py-[var(--sec-y-desktop)] bg-black">
                         <div className="absolute inset-0">

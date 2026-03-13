@@ -44,9 +44,30 @@ const TalentEducation = () => {
     ];
 
     const tracks = [
-        { name: 'MECHANICAL MASTER', icon: '⚡', color: 'from-cyan-500 to-blue-500' },
-        { name: 'IGL LEADERSHIP', icon: '🧠', color: 'from-teal-500 to-emerald-500' },
-        { name: 'ANALYST PATHWAY', icon: '📊', color: 'from-blue-500 to-indigo-500' }
+        { 
+            name: 'MECHANICAL MASTER', 
+            icon: '⚡', 
+            color: 'from-cyan-500 to-blue-500', 
+            focus: ['Aim Consistency', 'Movement Tech', 'Crosshair Placement', 'Entry Fragging'],
+            desc: 'For the highly aggressive player seeking maximum raw output. We rebuild your mechanics from the ground up until headshots become subconscious.',
+            alumni: '85%'
+        },
+        { 
+            name: 'IGL LEADERSHIP', 
+            icon: '🧠', 
+            color: 'from-teal-500 to-emerald-500', 
+            focus: ['Macro strategy', 'Mid-round Calls', 'Economy Management', 'Tilt Control'],
+            desc: 'Designed for the tactician. Learn how to read the map, control the tempo of a match, and lead a squad through high-pressure situations.',
+            alumni: '92%'
+        },
+        { 
+            name: 'ANALYST PATHWAY', 
+            icon: '📊', 
+            color: 'from-blue-500 to-indigo-500', 
+            focus: ['VOD Dissection', 'Heatmap reading', 'Draft Strategy', 'Opponent Profiling'],
+            desc: 'Become the brain behind the scenes. Master data aggregation software, learn to find the micro-mistakes, and prepare championship-winning anti-strats.',
+            alumni: '99%'
+        }
     ];
 
     return (
@@ -63,7 +84,7 @@ const TalentEducation = () => {
                 <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative z-10 w-full max-w-5xl mx-auto">
                     <p className="text-cyan-400 uppercase tracking-[0.5em] text-xs md:text-sm font-bold mb-6">EST. 2024 / ACADEMY DIVISION</p>
                     
-                    <h1 className="text-6xl md:text-[7rem] font-black uppercase leading-[0.85] tracking-tighter mb-8 break-words text-transparent bg-clip-text bg-gradient-to-br from-cyan-300 via-white to-teal-700">
+                    <h1 className="text-6xl md:text-[7rem] font-black uppercase leading-[0.85] mb-8 break-words text-transparent bg-clip-text bg-gradient-to-br from-cyan-300 via-white to-teal-700">
                         HACK YOUR <br/> <span className="text-white">POTENTIAL</span>
                     </h1>
                     
@@ -118,38 +139,76 @@ const TalentEducation = () => {
                 </div>
             </section>
 
-            {/* TRACK CARDS - Hover Reveal Layout */}
-            <section className="py-24 border-t border-cyan-900/30">
-                <div className="container-safe">
-                    <div className="text-center mb-16">
-                        <span className="text-sm font-bold uppercase tracking-widest text-teal-500 mb-2 block">// SPECIALIZATIONS</span>
-                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">Select Your <span className="text-cyan-500">Vector</span></h2>
+            {/* SPECIALIZATION TRACKS - Detailed Class Selection Layout */}
+            <section className="py-32 border-t border-cyan-900/30 relative bg-[#010306] overflow-hidden z-10">
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50" />
+                
+                <div className="container-safe px-4">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-20">
+                        <div className="max-w-xl">
+                            <span className="text-cyan-400 font-bold uppercase tracking-[0.3em] text-sm block mb-4 border-l-2 border-cyan-500 pl-4">CLASS SYSTEM</span>
+                            <h2 className="text-5xl md:text-6xl font-black uppercase font-['Orbitron',sans-serif] text-white">
+                                SELECT YOUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-400">VECTOR</span>
+                            </h2>
+                        </div>
+                        <p className="text-gray-400 max-w-md md:text-right mt-6 md:mt-0 font-['Rajdhani',sans-serif] text-lg lg:text-xl">
+                            We don't do general training. You must commit to a primary role matrix to optimize your neural output.
+                        </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         {tracks.map((track, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: i * 0.1 }}
-                                className="group relative h-80 bg-gray-900 border border-cyan-900/20 flex flex-col items-center justify-center p-8 overflow-hidden cursor-pointer"
+                                transition={{ duration: 0.6, delay: i * 0.15 }}
+                                className="group relative bg-[#02050a] border border-cyan-900/40 hover:border-cyan-500/60 p-8 flex flex-col h-full transform transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(6,182,212,0.15)]"
                             >
-                                {/* Background Gradient Hover */}
-                                <div className={`absolute inset-0 bg-gradient-to-br ${track.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
+                                {/* Background Hex/Grid texture */}
+                                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoNiwgMTgyLCAyMTIsIDAuMDUpIi8+PC9zdmc+')] opacity-50 z-0 pointer-events-none" />
                                 
-                                <span className="text-6xl mb-6 group-hover:scale-125 transition-transform duration-500 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]">{track.icon}</span>
-                                <h3 className="text-2xl font-black uppercase text-center relative z-10 group-hover:tracking-wider transition-all duration-300">{track.name}</h3>
+                                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${track.color} opacity-0 group-hover:opacity-10 blur-3xl transition-opacity duration-700 z-0`} />
                                 
-                                {/* Bottom Accent Line */}
-                                <div className="absolute bottom-0 left-0 h-1 bg-cyan-400 w-full scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500" />
+                                <div className="relative z-10 flex flex-col h-full">
+                                    <div className="flex justify-between items-center mb-8 pb-6 border-b border-cyan-900/30">
+                                        <div className={`w-16 h-16 rounded flex items-center justify-center text-3xl bg-gradient-to-br ${track.color} bg-opacity-10 border border-white/10 group-hover:scale-110 transition-transform`}>
+                                            <span style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>{track.icon}</span>
+                                        </div>
+                                        <div className="text-right">
+                                            <span className="block text-3xl font-black text-white font-['Orbitron',sans-serif] group-hover:text-cyan-400 transition-colors uppercase">{track.alumni}</span>
+                                            <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Success Rate</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <h3 className="text-2xl xl:text-3xl font-black uppercase text-white mb-4 font-['Orbitron',sans-serif]">{track.name}</h3>
+                                    
+                                    <p className="text-cyan-100/60 font-['Rajdhani',sans-serif] text-base lg:text-lg leading-relaxed mb-8 flex-grow">
+                                        {track.desc}
+                                    </p>
+                                    
+                                    <div className="mt-auto">
+                                        <h4 className="text-xs text-cyan-500 font-bold uppercase tracking-widest mb-4">Core Focus Matrix</h4>
+                                        <ul className="space-y-3">
+                                            {track.focus.map((item, idx) => (
+                                                <li key={idx} className="flex items-center text-sm lg:text-base text-gray-300 font-medium font-['Rajdhani',sans-serif]">
+                                                    <span className="w-1.5 h-1.5 bg-cyan-500 mr-3 shadow-[0_0_5px_rgba(6,182,212,0.8)]" />
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    
+                                    <button className="mt-10 w-full py-4 bg-transparent border border-cyan-900/50 text-cyan-400 font-bold uppercase tracking-widest text-sm group-hover:bg-cyan-950/30 group-hover:border-cyan-500 transition-colors">
+                                        View Curriculum
+                                    </button>
+                                </div>
+                                
+                                {/* Bottom Accent */}
+                                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center pointer-events-none" />
                             </motion.div>
                         ))}
-                    </div>
-                    
-                    <div className="flex justify-center mt-12">
-                         <button className="text-cyan-400 uppercase tracking-widest font-bold text-sm hover:text-white transition-colors border-b border-cyan-400/50 pb-1 hover:border-white">View Full Syllabus ➔</button>
                     </div>
                 </div>
             </section>

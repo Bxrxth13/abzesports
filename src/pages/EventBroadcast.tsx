@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+// Removed unused react imports
 import { motion, useReducedMotion } from 'framer-motion';
-import Button from '../components/shared/Button';
+// Removed unused Button component
 import Footer from '../components/Footer';
 import SectorNav from '../components/SectorNav';
 
@@ -41,7 +41,7 @@ const SpotlightParticles = () => {
 };
 
 const EventBroadcast = () => {
-    const prefersReducedMotion = useReducedMotion();
+    // removed prefersReducedMotion
 
     const capabilities = [
         { title: 'Live Broadcast', icon: '🎥', desc: '4K Multi-camera setups with real-time switching.' },
@@ -75,9 +75,9 @@ const EventBroadcast = () => {
                         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                         <span className="text-amber-400 text-xs font-bold uppercase tracking-widest">LIVE BROADCAST DIVISION</span>
                     </motion.div>
-                    <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-6 text-white drop-shadow-[0_0_20px_rgba(251,191,36,0.3)]">
+                    <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="text-5xl md:text-8xl font-black uppercase mb-6 text-white drop-shadow-[0_0_20px_rgba(251,191,36,0.3)]">
                         THE SPECTACLE <br />
-                        <span className="text-amber-500 font-['Rajdhani',sans-serif] italic tracking-tight relative">
+                        <span className="text-amber-500 font-['Rajdhani',sans-serif] italic relative">
                             RE-ENGINEERED
                             <div className="absolute -inset-x-4 bottom-2 h-4 bg-amber-500/20 blur-xl -z-10" />
                         </span>
@@ -149,6 +149,90 @@ const EventBroadcast = () => {
                             </motion.div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* BROADCAST TECHNOLOGY */}
+            <section className="py-24 bg-[#0a0a0a] relative border-t border-amber-900/20 overflow-hidden">
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(245,158,11,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(245,158,11,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
+                
+                <div className="container-safe relative z-10 px-4">
+                    <div className="text-center mb-16">
+                        <span className="text-amber-500 font-bold uppercase tracking-[0.3em] text-sm block mb-4">Infrastructure</span>
+                        <h2 className="text-4xl md:text-6xl font-black uppercase font-['Rajdhani',sans-serif] text-white">
+                            STUDIO-GRADE <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">PRODUCTION</span>
+                        </h2>
+                        <p className="text-gray-400 max-w-2xl mx-auto mt-6 text-lg">
+                            We deploy industry-leading broadcast technology to ensure zero-latency, high-fidelity streams that keep audiences glued to their screens.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {[
+                            { title: '4K SIGNAL PIPELINE', desc: 'End-to-end 4K resolution support with redundant fiber connections for zero downtime.', icon: '📡' },
+                            { title: 'VIRTUAL STUDIOS', desc: 'Unreal Engine powered AR graphics, real-time 3D environments, and live player tracking.', icon: '👁️' },
+                            { title: 'OBSERVER DESK', desc: 'Veteran in-game directors who catch every crucial rotation, clutch, and team fight.', icon: '🎯' },
+                            { title: 'INSTANT REPLAY SYSTEM', desc: 'Multi-angle cinematic replays delivered within seconds of the action.', icon: '⏪' }
+                        ].map((tech, i) => (
+                            <motion.div 
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="bg-black border border-white/5 hover:border-amber-500/40 p-8 transition-colors group relative overflow-hidden"
+                            >
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <div className="text-4xl mb-6 grayscale group-hover:grayscale-0 transition-all">{tech.icon}</div>
+                                <h3 className="text-lg font-black text-white uppercase tracking-wide mb-3">{tech.title}</h3>
+                                <p className="text-gray-500 text-sm leading-relaxed">{tech.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* EVENT METRICS */}
+            <section className="py-20 bg-amber-500 relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png')] opacity-[0.15] mix-blend-overlay" />
+                <div className="container-safe px-4 relative z-10 flex flex-col md:flex-row justify-around items-center gap-10">
+                    {[
+                        { label: 'PEAK CONCURRENT', value: '450K+' },
+                        { label: 'HOURS WATCHED', value: '12M+' },
+                        { label: 'EVENTS PRODUCED', value: '25+' },
+                        { label: 'AVG RATING', value: '4.9/5' }
+                    ].map((metric, i) => (
+                        <motion.div 
+                            key={i}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.1, type: 'spring' }}
+                            className="text-center text-black"
+                        >
+                            <span className="block text-5xl md:text-6xl font-black font-['Rajdhani',sans-serif] mb-2">{metric.value}</span>
+                            <span className="block text-sm font-bold uppercase tracking-widest bg-black text-amber-500 px-4 py-1.5 -skew-x-12 inline-block shadow-[0_4px_10px_rgba(0,0,0,0.3)]">
+                                <span className="block skew-x-12">{metric.label}</span>
+                            </span>
+                        </motion.div>
+                    ))}
+                </div>
+            </section>
+
+            {/* CTA SECTION */}
+            <section className="py-32 bg-black relative flex items-center justify-center text-center overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.15)_0%,black_70%)] pointer-events-none" />
+                <div className="relative z-10 container-safe px-4">
+                    <h2 className="text-5xl md:text-7xl font-black uppercase text-white mb-6 tracking-tight">
+                        MAKE YOUR NEXT EVENT <br />
+                        <span className="text-amber-500 font-['Rajdhani',sans-serif] italic drop-shadow-[0_0_20px_rgba(245,158,11,0.4)]">UNFORGETTABLE</span>
+                    </h2>
+                    <p className="text-gray-400 text-xl font-light max-w-2xl mx-auto mb-10">
+                        From conceptualizing stage designs to executing flawless 4K broadcasts, Autobotz is your end-to-end production partner.
+                    </p>
+                    <button className="bg-gradient-to-r from-amber-600 to-amber-400 text-black font-black uppercase tracking-widest px-14 py-5 text-lg hover:scale-105 transition-transform shadow-[0_0_30px_rgba(245,158,11,0.4)]">
+                        REQUEST A QUOTE
+                    </button>
                 </div>
             </section>
 

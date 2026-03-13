@@ -109,7 +109,7 @@ const CompetitiveEsports = () => {
                             <h2 className="text-red-500 font-bold uppercase tracking-[0.3em] text-sm md:text-base">Elite Competition Division</h2>
                         </div>
                         
-                        <h1 className="text-7xl md:text-[9rem] font-black uppercase leading-[0.8] tracking-tighter mb-8 font-['Orbitron',sans-serif] italic text-white drop-shadow-2xl">
+                        <h1 className="text-7xl md:text-[9rem] font-black uppercase leading-[0.8] mb-8 font-['Orbitron',sans-serif] italic text-white drop-shadow-2xl">
                             CHAMPIONS <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-red-800" style={{ WebkitTextStroke: '1px rgba(220, 38, 38, 0.4)' }}>NEVER REST</span>
                         </h1>
@@ -154,7 +154,7 @@ const CompetitiveEsports = () => {
                 <div className="container-safe max-w-7xl mx-auto">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-12">
                         <div>
-                            <h2 className="text-5xl md:text-7xl font-black uppercase font-['Orbitron',sans-serif] italic mb-2 tracking-tighter">THE <span className="text-transparent bg-clip-text bg-gradient-to-br from-zinc-300 to-zinc-600">SQUADS</span></h2>
+                            <h2 className="text-5xl md:text-7xl font-black uppercase font-['Orbitron',sans-serif] italic mb-2">THE <span className="text-transparent bg-clip-text bg-gradient-to-br from-zinc-300 to-zinc-600">SQUADS</span></h2>
                         </div>
                         <div className="flex gap-2 bg-zinc-900/50 p-1 rounded-sm border border-zinc-800 w-full md:w-auto overflow-x-auto hide-scrollbar mt-6 md:mt-0">
                             {teams.map(team => (
@@ -210,7 +210,7 @@ const CompetitiveEsports = () => {
                                                 <div className="inline-block px-3 py-1 bg-zinc-800 text-red-500 font-bold text-xs uppercase tracking-widest mb-4" style={{ clipPath: 'polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px)' }}>
                                                     {player.role}
                                                 </div>
-                                                <h4 className="text-4xl font-black uppercase text-white font-['Orbitron',sans-serif] italic tracking-tight">{player.name}</h4>
+                                                <h4 className="text-4xl font-black uppercase text-white font-['Orbitron',sans-serif] italic">{player.name}</h4>
                                             </div>
 
                                             {/* Action Shot Placeholder / Monogram */}
@@ -249,7 +249,6 @@ const CompetitiveEsports = () => {
                 
                 <div className="container-safe relative z-10 px-4 max-w-6xl mx-auto">
                     <div className="text-center mb-16">
-                        <span className="text-red-500 font-bold uppercase tracking-[0.3em] text-sm block mb-2">✦ RECENT FIXTURES ✦</span>
                         <h2 className="text-5xl md:text-7xl font-black uppercase font-['Orbitron',sans-serif] inline-block bg-zinc-900 px-8 py-2 border-2 border-zinc-800 text-white shadow-[0_4px_20px_rgba(0,0,0,0.5)] skew-x-[-10deg]">
                             <span className="block skew-x-[10deg]">MATCH CENTER</span>
                         </h2>
@@ -311,7 +310,7 @@ const CompetitiveEsports = () => {
                 </div>
                 
                 <div className="max-w-4xl text-center relative z-10">
-                    <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6">Train Like <span className="text-red-600 font-['Orbitron',sans-serif] italic">Professionals</span></h2>
+                    <h2 className="text-4xl md:text-6xl font-black uppercase mb-6">Train Like <span className="text-red-600 font-['Orbitron',sans-serif] italic">Professionals</span></h2>
                     <p className="text-xl text-gray-400 font-medium leading-relaxed mb-10 max-w-2xl mx-auto">
                         Think you have the mechanics to compete under the banner? Participate in our public combine events and prove you are tier-1 material.
                     </p>
