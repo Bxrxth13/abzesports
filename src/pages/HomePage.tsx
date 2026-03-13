@@ -55,6 +55,7 @@ const CustomCursor = () => {
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -92,14 +93,46 @@ const Header = () => {
 
                     {/* Nav Links */}
                     <div className="hidden lg:flex items-center space-x-10 pointer-events-auto">
-                        {['HOME', 'GAMES', 'VICTORIES', 'FOUNDERS'].map(link => (
-                            <div key={link} className="relative group cursor-pointer" onClick={() => scrollToSection(link.toLowerCase() === 'home' ? 'hero' : link.toLowerCase())}>
+                        {['HOME', 'GAMES', 'FOUNDERS'].map(link => (
+                            <div key={link} className="relative group cursor-pointer py-2" onClick={() => scrollToSection(link.toLowerCase() === 'home' ? 'hero' : link.toLowerCase())}>
                                 <span className="text-gray-300 font-bold uppercase tracking-[0.15em] text-sm group-hover:text-white transition-colors">
                                     {link}
                                 </span>
-                                <div className="absolute -bottom-2 left-0 w-0 h-[2px] bg-red-600 group-hover:w-full transition-all duration-300"></div>
+                                <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-red-600 group-hover:w-full transition-all duration-300"></div>
                             </div>
                         ))}
+
+                        {/* Sectors Dropdown */}
+                        <div className="relative group cursor-pointer items-center py-2 h-full flex">
+                            <div className="relative">
+                                <span className="text-gray-300 font-bold uppercase tracking-[0.15em] text-sm group-hover:text-white transition-colors flex items-center gap-1">
+                                    SECTORS
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                </span>
+                                <div className="absolute -bottom-2 left-0 w-0 h-[2px] bg-red-600 group-hover:w-full transition-all duration-300"></div>
+                            </div>
+                            
+                            {/* Hover Bridge */}
+                            <div className="absolute top-full left-0 w-full h-4"></div>
+
+                            {/* Dropdown Menu */}
+                            <div className="absolute top-[calc(100%+0.5rem)] left-1/2 -translate-x-1/2 w-48 bg-black/95 backdrop-blur-md border border-red-900/50 rounded-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 overflow-hidden shadow-[0_10px_30px_rgba(220,38,38,0.15)]">
+                                {[
+                                    { title: 'Competitive', path: '/competitive' },
+                                    { title: 'Marketing', path: '/marketing' },
+                                    { title: 'Education', path: '/education' },
+                                    { title: 'Events', path: '/events' }
+                                ].map((sector, idx) => (
+                                    <div 
+                                        key={sector.title} 
+                                        onClick={() => navigate(sector.path)}
+                                        className={`px-4 py-3 text-sm font-bold text-gray-400 hover:text-white hover:bg-red-600/20 uppercase tracking-widest transition-colors border-l-2 border-transparent hover:border-red-600 ${idx !== 3 ? 'border-b border-white/5' : ''}`}
+                                    >
+                                        {sector.title}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
 
                     {/* Join Squad CTA */}
@@ -123,11 +156,32 @@ const Header = () => {
             {/* Mobile Menu */}
             {isMenuOpen && (
                 <div className="lg:hidden bg-black/95 backdrop-blur-md border-b border-red-600 absolute top-full left-0 w-full pointer-events-auto flex flex-col p-6 gap-4">
-                    {['HOME', 'GAMES', 'VICTORIES', 'FOUNDERS'].map(link => (
+                    {['HOME', 'GAMES', 'FOUNDERS'].map(link => (
                         <div key={link} className="text-gray-300 font-bold uppercase tracking-[0.15em] text-sm py-2" onClick={() => scrollToSection(link.toLowerCase() === 'home' ? 'hero' : link.toLowerCase())}>
                             {link}
                         </div>
                     ))}
+
+                    {/* Sectors Mobile */}
+                    <div className="py-2">
+                        <div className="text-gray-300 font-bold uppercase tracking-[0.15em] text-sm mb-3">SECTORS</div>
+                        <div className="flex flex-col gap-3 pl-4 border-l border-red-900/50">
+                            {[
+                                { title: 'Competitive', path: '/competitive' },
+                                { title: 'Marketing', path: '/marketing' },
+                                { title: 'Education', path: '/education' },
+                                { title: 'Events', path: '/events' }
+                            ].map((sector) => (
+                                <div 
+                                    key={sector.title} 
+                                    onClick={() => { setIsMenuOpen(false); navigate(sector.path); }}
+                                    className="text-gray-400 font-bold uppercase tracking-widest text-xs py-1 hover:text-white"
+                                >
+                                    {sector.title}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                     <button
                         onClick={() => scrollToSection('consultation')}
                         className="bg-red-600 text-white font-black px-8 py-3 text-sm tracking-[0.1em] uppercase w-max"
@@ -233,9 +287,16 @@ const Hero = ({ onShowModal }: { onShowModal?: (title: string, message: string) 
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.3 }}
-                        className="text-lg sm:text-xl md:text-2xl font-light text-gray-300 max-w-xl font-['Rajdhani',sans-serif] tracking-wide"
+                        className="max-w-xl font-['Rajdhani',sans-serif] tracking-wide"
                     >
-                        We Build <span className="text-red-500 font-bold">Teams</span>. We Create <span className="text-red-500 font-bold">Legends</span>.
+                        <span className="text-lg sm:text-xl md:text-2xl font-light text-gray-300">
+                            Culture <span className="text-red-500 font-bold">Derives</span> Everything.
+                        </span>
+                        <br />
+                        <span className="text-sm sm:text-base text-gray-500 mt-2 inline-block italic">
+                            — Moorthy Ramasamy (aka) ABzChief
+                            <span className="block text-xs mt-1 ml-4 text-red-400/80">(founder of Autobotz Group of Companies)</span>
+                        </span>
                     </motion.p>
 
                     <motion.div
@@ -1262,7 +1323,6 @@ function HomePage() {
                 <AboutSection />
                 <HeroCarousel />
                 <GamesSection />
-                <VictoriesSection />
                 <FoundersPage />
                 <ConsultationPage onShowModal={showModal} />
             </PageLayout>

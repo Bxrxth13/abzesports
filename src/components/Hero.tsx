@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
       {/* Background Image + Overlay */}
       <div className="absolute inset-0">
         <img
-          src="/images/hero/abzposter.jpg"
+          src="/images/hero/abzposter.jpeg"
           alt="AUTOBOTZ Esports Hero"
           className="
             w-full h-full

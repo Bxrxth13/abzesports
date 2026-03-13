@@ -4,7 +4,7 @@ const HeroCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [
-    '/images/hero/abzposter.jpg',
+    '/images/hero/abzposter.jpeg',
     '/images/hero/abzposters.jpg',
   ];
 
