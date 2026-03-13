@@ -275,27 +275,32 @@ const Hero = ({ onShowModal }: { onShowModal?: (title: string, message: string) 
                         <span className="text-red-500 text-[10px] font-bold uppercase tracking-[0.2em]">System / Sectors</span>
                         <div className="h-[1px] bg-gradient-to-r from-red-600 to-transparent flex-1" />
                     </div>
-                    {sectors.map((sector, i) => (
-                        <motion.div
-                            key={sector.title}
-                            onClick={() => routerNavigate(sector.path)}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.5, delay: 0.8 + i * 0.1 }}
-                            className="group relative cursor-none h-[72px] bg-[rgba(10,10,10,0.7)] hover:bg-[rgba(255,10,10,0.05)] backdrop-blur-md border border-white/5 transition-all duration-300 flex items-center px-6 overflow-hidden shadow-lg shadow-black/50"
-                        >
-                            {/* Hover Active Left Border */}
-                            <div className="absolute left-0 top-0 h-full w-[3px] bg-red-600 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom" />
-
-                            <span className="text-2xl mr-4 text-gray-500 group-hover:text-red-500 transition-colors duration-300 grayscale group-hover:grayscale-0">{sector.icon}</span>
-                            <h3 className="text-sm font-bold uppercase tracking-[0.15em] text-gray-300 group-hover:text-white transition-all duration-300 group-hover:-translate-x-1">
-                                {sector.title}
-                            </h3>
-                            <span className="ml-auto text-red-600 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 font-bold">
-                                ➔
-                            </span>
-                        </motion.div>
-                    ))}
+                    <div className="grid grid-cols-2 lg:grid-cols-1 gap-3 lg:gap-4">
+                        {sectors.map((sector, i) => (
+                            <motion.button
+                                key={sector.title}
+                                onClick={() => routerNavigate(sector.path)}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.5, delay: 0.8 + i * 0.1 }}
+                                className="group relative cursor-pointer sm:cursor-none w-full h-[58px] lg:h-[72px] bg-gradient-to-r from-[rgba(20,0,0,0.8)] to-[rgba(5,5,5,0.9)] hover:from-[rgba(60,5,5,0.9)] hover:to-[rgba(20,0,0,0.9)] backdrop-blur-md border border-red-600/40 hover:border-red-500 transition-all duration-300 flex items-center justify-between px-3 md:px-5 lg:px-6 shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:shadow-[0_0_25px_rgba(220,38,38,0.3)]"
+                                style={{ clipPath: 'polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)' }}
+                            >
+                                {/* Left Glowing Edge */}
+                                <div className="absolute left-0 top-0 h-full w-[3px] bg-red-600 group-hover:w-[4px] group-hover:shadow-[0_0_10px_rgba(255,0,0,0.8)] transition-all duration-300" />
+                                
+                                <span className="text-xs lg:text-sm font-black uppercase tracking-[0.15em] lg:tracking-[0.2em] text-gray-100 group-hover:text-white transition-colors duration-300 ml-1 lg:ml-2">
+                                    {sector.title}
+                                </span>
+                                
+                                <div className="w-8 h-8 lg:w-10 lg:h-10 border border-white/10 group-hover:border-red-500/50 flex items-center justify-center bg-white/5 group-hover:bg-red-600 transition-all duration-300 transform group-hover:scale-110" style={{ clipPath: 'polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)' }}>
+                                    <span className="text-red-500 group-hover:text-white transition-colors duration-300 text-sm lg:text-base font-bold translate-x-[2px]">
+                                        ➔
+                                    </span>
+                                </div>
+                            </motion.button>
+                        ))}
+                    </div>
                 </motion.div>
             </div>
 
@@ -1194,10 +1199,12 @@ function HomePage() {
                         </div>
 
                         <div className="relative container-safe">
-                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-10">
+                            {/* Top: Brand + Quick Links */}
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                                {/* Left: Brand */}
                                 <div>
                                     <img src="/images/logos/Abz Logo Red.png" alt="AUTOBOTZ Logo" className="w-14 h-14 sm:w-16 sm:h-16 mb-4 sm:mb-6" />
-                                    <p className="text-gray-400 text-sm mb-5 sm:mb-6">
+                                    <p className="text-gray-400 text-sm mb-5 sm:mb-6 italic">
                                         Building the future of esports through professional team management,
                                         content creation, and competitive excellence across all gaming platforms.
                                     </p>
@@ -1210,89 +1217,46 @@ function HomePage() {
                                             className="w-10 h-10 bg-gray-900 border-l-4 border-red-600 flex items-center justify-center text-gray-400 hover:text-white transition-all transform hover:scale-110"
                                             aria-label="Instagram"
                                         >
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
                                             </svg>
                                         </a>
                                     </div>
                                 </div>
 
-                                <div className="lg:col-span-2 w-full ml-auto mt-6 sm:mt-8 lg:mt-12">
-                                    <div className="max-w-xl lg:ml-auto">
-                                        <h3 className="text-white font-bold text-base sm:text-lg uppercase">Subscribe</h3>
-                                        <p className="text-gray-400 text-sm mb-3 sm:mb-4">
-                                            Don’t miss to subscribe to our new feeds, kindly fill the form below.
-                                        </p>
-                                        <form
-                                            onSubmit={async (e) => {
-                                                e.preventDefault();
-                                                const emailInput = (e.currentTarget.elements.namedItem('email') as HTMLInputElement).value;
-                                                try {
-                                                    const response = await fetch('http://localhost:3000/api/consultation', {
-                                                        method: 'POST',
-                                                        headers: { 'Content-Type': 'application/json' },
-                                                        body: JSON.stringify({
-                                                            name: 'Newsletter Subscriber',
-                                                            email: emailInput,
-                                                            gameInterest: 'Newsletter Subscription',
-                                                            message: 'User subscribed to newsletter'
-                                                        }),
-                                                    });
-                                                    const data = await response.json();
-                                                    if (data.success) {
-                                                        showModal('Subscribed', 'You have successfully joined our squad! Check your email for confirmation.');
-                                                        (e.target as HTMLFormElement).reset();
-                                                    } else {
-                                                        showModal('Error', data.message || 'Communication failed. Please try again.');
-                                                    }
-                                                } catch (err) {
-                                                    showModal('Offline', 'Could not reach the server. Please check your connection.');
-                                                }
-                                            }}
-                                            className="flex flex-col sm:flex-row items-stretch gap-3"
-                                        >
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                required
-                                                placeholder="Email Address"
-                                                className="flex-1 bg-black/70 border border-gray-700 text-gray-200 placeholder-gray-500 px-4 py-3 focus:outline-none focus:border-red-500 rounded"
-                                            />
-                                            <button
-                                                type="submit"
-                                                className="px-5 py-3 bg-red-600 hover:bg-red-500 text-white font-bold transition-colors"
-                                                style={{ clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%)' }}
-                                            >
-                                                Subscribe
-                                            </button>
-                                        </form>
-                                    </div>
+                                {/* Right: Quick Links Grid */}
+                                <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-8 pl-0 lg:pl-20 pt-0 lg:pt-14">
+                                    {([
+                                        { category: 'Games', links: ['BGMI', 'Free Fire', 'Pokémon Unite', 'Indus'] },
+                                        { category: 'Company', links: ['About Us', 'Founders', 'Careers', 'Contact'] },
+                                        { category: 'Services', links: ['Team Management', 'Content Creation', 'Consultation', 'Tournaments'] },
+                                        { category: 'Legal', links: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'GDPR'] },
+                                    ] as { category: string; links: string[] }[]).map(({ category, links }) => (
+                                        <div key={category}>
+                                            <h3 className="text-white font-bold uppercase text-xs mb-5 border-l-4 border-red-600 pl-3 tracking-widest">
+                                                {category}
+                                            </h3>
+                                            <ul className="space-y-3">
+                                                {links.map(link => (
+                                                    <li key={link}>
+                                                        <a href="#" className="text-gray-400 hover:text-red-400 transition-colors text-sm">{link}</a>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
 
-                            <div className="border-t-2 border-gray-800 pt-4 sm:pt-6">
-                                <div className="flex flex-col items-center gap-2 sm:gap-3 text-sm">
-                                    <div className="flex flex-wrap items-center justify-center gap-4 sm:space-x-6 text-gray-500">
-                                        <button
-                                            onClick={() => setActivePopup('privacy')}
-                                            className="hover:text-red-400 transition-colors cursor-pointer"
-                                        >
-                                            Privacy
-                                        </button>
-                                        <button
-                                            onClick={() => setActivePopup('terms')}
-                                            className="hover:text-red-400 transition-colors cursor-pointer"
-                                        >
-                                            Terms
-                                        </button>
-                                        <button
-                                            onClick={() => setActivePopup('support')}
-                                            className="hover:text-red-400 transition-colors cursor-pointer"
-                                        >
-                                            Support
-                                        </button>
+                            {/* Bottom Bar */}
+                            <div className="border-t border-gray-800 pt-4 sm:pt-6">
+                                <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-sm">
+                                    <p className="text-gray-500">© 2026 AUTOBOTZ ESPORTS. All rights reserved.</p>
+                                    <div className="flex flex-wrap items-center gap-4 text-gray-500">
+                                        <button onClick={() => setActivePopup('privacy')} className="hover:text-red-400 transition-colors cursor-pointer">Privacy Policy</button>
+                                        <button onClick={() => setActivePopup('terms')} className="hover:text-red-400 transition-colors cursor-pointer">Terms of Service</button>
+                                        <button onClick={() => setActivePopup('support')} className="hover:text-red-400 transition-colors cursor-pointer">Support</button>
                                     </div>
-                                    <p className="text-gray-500">© 2025 AUTOBOTZ ESPORTS. All rights reserved.</p>
                                 </div>
                             </div>
                         </div>
