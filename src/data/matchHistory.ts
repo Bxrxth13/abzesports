@@ -46,12 +46,19 @@ export const teamMatchHistory: Record<string, MatchHistoryRecord[]> = {
         { date: '2022-05-15', placement: '17th - 20th', tier: 'Qualifier', tournament: 'Battlegrounds Mobile India Open Challenge 2022', prize: '-' }
     ],
     'ff': [
-        // Free fire matches will go here
+        { date: '2025', placement: '1st', tier: '-', tournament: 'The Esports Club Challenger Series 2025', prize: '-' },
+        { date: '2025', placement: '1st', tier: '-', tournament: 'Lidoma free fire South Asia rivals', prize: '-' },
+        { date: '2025', placement: '2nd', tier: '-', tournament: 'Lidoma endless series 2025 india open regional cups', prize: '-' },
+        { date: '2025', placement: '1st', tier: '-', tournament: 'Sky Esports Pro League', prize: '-' },
+        { date: '2021', placement: '2nd', tier: '-', tournament: 'Free fire championship 2021', prize: '-' }
+    ],
+    'cod': [
+        { date: '-', placement: '3rd', tier: '-', tournament: 'Snapdragon Pro Series Esl', prize: '-' }
     ],
     'pokemon': [
-        // Pokemon unite matches will go here
+        { date: '-', placement: '2nd', tier: '-', tournament: 'TN CM TROPHY', prize: '-' }
     ],
-    'indus': [
-        // Indus matches will go here
-    ]
+    // 'indus': [
+    //     // Indus matches will go here
+    // ]
 };

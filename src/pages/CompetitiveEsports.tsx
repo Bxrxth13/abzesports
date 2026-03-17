@@ -25,11 +25,17 @@ const teams = [
         achievements: 'WCS Regional Champs'
     },
     {
-        id: 'indus',
-        title: 'INDUS BATTLE ROYALE',
-        short: 'INDUS',
-        achievements: 'Pre-Season Invites'
-    }
+        id: 'cod',
+        title: 'CALL OF DUTY MOBILE',
+        short: 'CODM',
+        achievements: 'Snapdragon Pro Series'
+    },
+    // {
+    //     id: 'indus',
+    //     title: 'INDUS BATTLE ROYALE',
+    //     short: 'INDUS',
+    //     achievements: 'Pre-Season Invites'
+    // }
 ];
 
 // Removed generic static match history for the dynamic table
