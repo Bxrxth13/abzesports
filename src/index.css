@@ -37,6 +37,17 @@ body {
   overflow-x: hidden;
   min-height: 100svh;
   min-height: -webkit-fill-available;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input, textarea {
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
 }
 
 *, *::before, *::after { box-sizing: border-box; }

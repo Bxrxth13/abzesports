@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import HeroCarousel from '../components/HeroCarousel';
 import PageLayout from '../layout/PageLayout';
 import { AnimatedCounter } from '../components/AnimatedCounter';
@@ -290,7 +290,7 @@ const Hero = ({ onShowModal }: { onShowModal?: (title: string, message: string) 
                         className="max-w-xl font-['Rajdhani',sans-serif] tracking-wide"
                     >
                         <span className="text-lg sm:text-xl md:text-2xl font-light text-gray-300">
-                            Culture <span className="text-red-500 font-bold">Derives</span> Everything.
+                           " Culture <span className="text-red-500 font-bold">Derives</span> Everything."
                         </span>
                         <br />
                         <span className="text-sm sm:text-base text-gray-500 mt-2 inline-block italic">
@@ -364,50 +364,6 @@ const Hero = ({ onShowModal }: { onShowModal?: (title: string, message: string) 
                     </div>
                 </motion.div>
             </div>
-
-            {/* Bottom Anchored Stats Bar 
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1 }}
-                className="absolute bottom-0 w-full border-t border-white/5 bg-[rgba(5,5,5,0.85)] backdrop-blur-md z-20 py-4 hidden md:block"
-            >
-                <div className="container-safe flex justify-around items-center divide-x divide-white/10">
-                    <div className="px-8 text-center flex-1">
-                        <span className="block text-3xl font-['Orbitron',sans-serif] font-black text-white">45+</span>
-                        <span className="text-[10px] font-bold text-red-500 uppercase tracking-[0.2em]">Active Assets</span>
-                    </div>
-                    <div className="px-8 text-center flex-1">
-                        <span className="block text-3xl font-['Orbitron',sans-serif] font-black text-white">6</span>
-                        <span className="text-[10px] font-bold text-red-500 uppercase tracking-[0.2em]">Elite Squads</span>
-                    </div>
-                    <div className="px-8 text-center flex-1">
-                        <span className="block text-3xl font-['Orbitron',sans-serif] font-black text-white">12</span>
-                        <span className="text-[10px] font-bold text-red-500 uppercase tracking-[0.2em]">Major Victories</span>
-                    </div>
-                </div>
-            </motion.div>*/}
-
-            {/* Right Side Vertical Nav 
-            <div className="fixed right-6 top-1/2 -translate-y-1/2 pr-4 py-8 z-[9999] hidden lg:flex flex-col items-end gap-12 pointer-events-auto mix-blend-difference border-r border-white/10">
-                {[
-                    { id: 'hero', label: 'HOME' },
-                    { id: 'about', label: 'ABOUT' },
-                    { id: 'founders', label: 'FOUNDERS' },
-                ].map((btn) => (
-                    <button
-                        key={btn.id}
-                        onClick={() => scrollToSection(btn.id)}
-                        className="group flex flex-col items-end cursor-none relative pointer-events-auto"
-                    >
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 group-hover:text-red-500 transition-colors duration-300 [writing-mode:vertical-lr] rotate-180">
-                            {btn.label}
-                        </span>
-                        
-                        <div className="absolute top-1/2 -translate-y-1/2 -right-[19px] w-[5px] h-[5px] bg-red-600 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300 shadow-[0_0_8px_rgba(255,0,0,0.8)]" />
-                    </button>
-                ))}
-            </div>*/}
         </section>
     );
 };
@@ -434,15 +390,15 @@ const GamesSection = () => {
             { alias: 'AREEB', name: 'Areeb', image: '/images/players/bgmi/areeb.png' },
             { alias: 'LOBSTER', name: 'Lobster', image: '/images/players/bgmi/lobster.png' },
             { alias: 'RALPHIE', name: 'Ralphie', image: '/images/players/bgmi/ralphie.png' },
-            { alias: 'RUSHBOY', name: 'Rushboy', image: '/images/players/bgmi/rushboy.png' },
-            { alias: 'TOXIC', name: 'Toxic', image: '/images/players/bgmi/toxic.png' }
+            { alias: 'PRO', name: 'Pro', image: '/images/players/bgmi/Pro.webp' },
+            { alias: 'SKILLFUL', name: 'Skillful', image: '/images/players/bgmi/Skillful.webp' }
         ],
         FREEFIRE: [
-            { alias: 'FIREFIST', name: 'Firefist', image: '/images/players/ff/firefist.png' },
-            { alias: 'MAAC', name: 'Maac', image: '/images/players/ff/maac.png' },
-            { alias: 'MAYANK', name: 'Mayank', image: '/images/players/ff/mayank.png' },
-            { alias: 'SOHEL', name: 'Sohel', image: '/images/players/ff/sohel.png' },
-            { alias: 'MYSTRIOUS', name: 'Mystrious', image: '/images/players/ff/mystrious.png' },
+            { alias: 'ALEEM', name: 'Aleem', image: '/images/players/ff/Aleem.webp' },
+            { alias: 'ANBU', name: 'Anbu', image: '/images/players/ff/Anbu.webp' },
+            { alias: 'KRISH', name: 'Krish', image: '/images/players/ff/Krish.webp' },
+            { alias: 'SHEIK', name: 'Sheik', image: '/images/players/ff/Sheik.webp' },
+            { alias: 'SHYAM', name: 'Shyam', image: '/images/players/ff/Shyam.webp' },
         ],
         POKEMON: [
             { alias: 'ZORO', name: 'Player One', image: '/images/players/pokemon/zoro.png' },
@@ -1282,19 +1238,61 @@ function HomePage() {
                                 {/* Right: Quick Links Grid */}
                                 <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-8 pl-0 lg:pl-20 pt-0 lg:pt-14">
                                     {([
-                                        { category: 'Games', links: ['BGMI', 'Free Fire', 'Pokémon Unite', 'Indus'] },
-                                        { category: 'Company', links: ['About Us', 'Founders', 'Careers', 'Contact'] },
-                                        { category: 'Services', links: ['Team Management', 'Content Creation', 'Consultation', 'Tournaments'] },
-                                        { category: 'Legal', links: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'GDPR'] },
-                                    ] as { category: string; links: string[] }[]).map(({ category, links }) => (
+                                        { category: 'Players', links: [
+                                            { name: 'BGMI', href: '#games' },
+                                            { name: 'Free Fire', href: '#games' },
+                                            { name: 'Pokémon Unite', href: '#games' },
+                                            { name: 'Indus', href: '#games' }
+                                        ] },
+                                        { category: 'Company', links: [
+                                            { name: 'Home', href: '#hero' }, 
+                                            { name: 'About Us', href: '#about' }, 
+                                            { name: 'Founders', href: '#founders' }, 
+                                            { name: 'Contact', href: '#footer' }
+                                        ] },
+                                        { category: 'Sectors', links: [
+                                            { name: 'Competitive', href: '/competitive' }, 
+                                            { name: 'Marketing', href: '/marketing' }, 
+                                            { name: 'Talent Education', href: '/education' }, 
+                                            { name: 'Event Broadcast', href: '/events' }
+                                        ] },
+                                        { category: 'Legal', links: [
+                                            { name: 'Privacy Policy', handle: 'privacy' }, 
+                                            { name: 'Terms of Service', handle: 'terms' }, 
+                                            { name: 'Cookie Policy', href: '#' },
+                                            { name: 'Support', handle: 'support' }
+                                        ] },
+                                    ] as { category: string; links: any[] }[]).map(({ category, links }) => (
                                         <div key={category}>
                                             <h3 className="text-white font-bold uppercase text-xs mb-5 border-l-4 border-red-600 pl-3 tracking-widest">
                                                 {category}
                                             </h3>
                                             <ul className="space-y-3">
                                                 {links.map(link => (
-                                                    <li key={link}>
-                                                        <a href="#" className="text-gray-400 hover:text-red-400 transition-colors text-sm">{link}</a>
+                                                    <li key={link.name}>
+                                                        {link.handle ? (
+                                                            <button 
+                                                                onClick={() => setActivePopup(link.handle as any)}
+                                                                className="text-gray-400 hover:text-red-400 transition-colors text-sm cursor-pointer"
+                                                            >
+                                                                {link.name}
+                                                            </button>
+                                                        ) : link.href.startsWith('#') ? (
+                                                            <a 
+                                                                href={link.href} 
+                                                                onClick={(e) => {
+                                                                    e.preventDefault();
+                                                                    scrollToSection(link.href.replace('#', ''));
+                                                                }}
+                                                                className="text-gray-400 hover:text-red-400 transition-colors text-sm"
+                                                            >
+                                                                {link.name}
+                                                            </a>
+                                                        ) : (
+                                                            <Link to={link.href} className="text-gray-400 hover:text-red-400 transition-colors text-sm">
+                                                                {link.name}
+                                                            </Link>
+                                                        )}
                                                     </li>
                                                 ))}
                                             </ul>

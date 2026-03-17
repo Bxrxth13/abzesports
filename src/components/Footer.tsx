@@ -1,11 +1,43 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+import { Link } from 'react-router-dom';
+
 const footerLinks = [
-  { category: 'Games', links: ['BGMI', 'Free Fire', 'Pokémon Unite', 'Indus'] },
-  { category: 'Company', links: ['About Us', 'Founders', 'Careers', 'Contact'] },
-  { category: 'Services', links: ['Team Management', 'Content Creation', 'Consultation', 'Tournaments'] },
-  { category: 'Legal', links: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'GDPR'] },
+  {
+    category: 'Games',
+    links: [
+      { name: 'BGMI', path: '/competitive' },
+      { name: 'Free Fire', path: '/competitive' },
+      { name: 'Pokémon Unite', path: '/competitive' },
+      { name: 'Indus', path: '/competitive' }
+    ]
+  },
+  {
+    category: 'Company',
+    links: [
+      { name: 'About Us', path: '/#about' },
+      { name: 'Founders', path: '/#founders' },
+      { name: 'Contact', path: '/#footer' }
+    ]
+  },
+  {
+    category: 'Services',
+    links: [
+      { name: 'Competitive Gaming', path: '/competitive' },
+      { name: 'Marketing', path: '/marketing' },
+      { name: 'Education', path: '/education' },
+      { name: 'Events', path: '/events' }
+    ]
+  },
+  {
+    category: 'Legal',
+    links: [
+      { name: 'Privacy Policy', path: '#' },
+      { name: 'Terms of Service', path: '#' },
+      { name: 'Cookie Policy', path: '#' }
+    ]
+  },
 ];
 
 const Footer: React.FC = () => {
@@ -91,10 +123,16 @@ const Footer: React.FC = () => {
                 </h3>
                 <ul className="space-y-3">
                   {links.map(link => (
-                    <li key={link}>
-                      <a href="#" className="text-gray-400 hover:text-red-400 transition-colors text-sm">
-                        {link}
-                      </a>
+                    <li key={link.name}>
+                      {link.path.startsWith('/#') ? (
+                        <a href={link.path} className="text-gray-400 hover:text-red-400 transition-colors text-sm">
+                          {link.name}
+                        </a>
+                      ) : (
+                        <Link to={link.path} className="text-gray-400 hover:text-red-400 transition-colors text-sm">
+                          {link.name}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -110,7 +148,7 @@ const Footer: React.FC = () => {
             <div className="flex flex-wrap items-center gap-4 text-gray-500">
               <a href="#" className="hover:text-red-400 transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-red-400 transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-red-400 transition-colors">Support</a>
+              <a href="/#footer" className="hover:text-red-400 transition-colors">Support</a>
             </div>
           </div>
         </div>

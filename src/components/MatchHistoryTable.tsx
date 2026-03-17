@@ -19,7 +19,6 @@ export default function MatchHistoryTable({ matches }: { matches: MatchHistoryRe
                     <tr className="bg-gradient-to-r from-red-950 via-[#1a0505] to-black border-b border-red-900">
                         <th className="p-5 border border-red-900/40 text-red-500 font-black uppercase tracking-[0.2em] text-xs font-['Orbitron',sans-serif] whitespace-nowrap sticky left-0 z-10 bg-[#1a0505]">Date</th>
                         <th className="p-5 border border-red-900/40 text-red-500 font-black uppercase tracking-[0.2em] text-xs font-['Orbitron',sans-serif] whitespace-nowrap">Tournament</th>
-                        <th className="p-5 border border-red-900/40 text-red-500 font-black uppercase tracking-[0.2em] text-xs font-['Orbitron',sans-serif] whitespace-nowrap">Tier</th>
                         <th className="p-5 border border-red-900/40 text-red-500 font-black uppercase tracking-[0.2em] text-xs font-['Orbitron',sans-serif] whitespace-nowrap">Placement</th>
                     </tr>
                 </thead>
@@ -65,11 +64,6 @@ export default function MatchHistoryTable({ matches }: { matches: MatchHistoryRe
                                     {match.date}
                                 </td>
                                 <td className="p-5 border border-red-900/40 text-zinc-100 text-sm font-bold uppercase tracking-wider group-hover:text-red-400 transition-colors">{match.tournament}</td>
-                                <td className="p-5 border border-red-900/40">
-                                    <span className="px-2 py-1 bg-zinc-900 border border-zinc-700 text-zinc-400 text-[10px] font-black tracking-widest uppercase rounded-sm group-hover:border-zinc-500 group-hover:text-zinc-200 transition-colors">
-                                        {match.tier}
-                                    </span>
-                                </td>
                                 <td className={`p-5 border border-red-900/40 font-black text-2xl italic font-['Orbitron',sans-serif] ${placementColor}`}>
                                     {match.placement}
                                 </td>
