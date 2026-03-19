@@ -75,7 +75,7 @@ const EventBroadcast = () => {
                         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                         <span className="text-amber-400 text-xs font-bold uppercase tracking-widest">LIVE BROADCAST DIVISION</span>
                     </motion.div>
-                    <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="text-5xl md:text-8xl font-black uppercase mb-6 text-white drop-shadow-[0_0_20px_rgba(251,191,36,0.3)]">
+                    <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="text-5xl md:text-8xl font-black uppercase tracking-wider md:tracking-widest mb-6 text-white drop-shadow-[0_0_20px_rgba(251,191,36,0.3)]">
                         THE SPECTACLE <br />
                         <span className="text-amber-500 font-['Rajdhani',sans-serif] italic relative">
                             RE-ENGINEERED
@@ -121,7 +121,7 @@ const EventBroadcast = () => {
                     <div className="flex flex-col md:flex-row justify-between items-end mb-12">
                         <div>
                             <span className="text-emerald-400 text-sm font-bold uppercase tracking-widest mb-2 block">// PORTFOLIO</span>
-                            <h2 className="text-4xl md:text-5xl font-black uppercase font-['Rajdhani',sans-serif]">Stages <span className="text-amber-500">Mastered</span></h2>
+                            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider md:tracking-widest font-['Rajdhani',sans-serif]">Stages <span className="text-amber-500">Mastered</span></h2>
                         </div>
                         <p className="text-gray-500 max-w-md text-right hidden md:block mt-4 md:mt-0 leading-relaxed font-light">
                             From 500-seat auditoriums to grand arenas. Every LAN we touch is optimized for player comfort and audience roar.
@@ -159,7 +159,7 @@ const EventBroadcast = () => {
                 <div className="container-safe relative z-10 px-4">
                     <div className="text-center mb-16">
                         <span className="text-amber-500 font-bold uppercase tracking-[0.3em] text-sm block mb-4">Infrastructure</span>
-                        <h2 className="text-4xl md:text-6xl font-black uppercase font-['Rajdhani',sans-serif] text-white">
+                        <h2 className="text-4xl md:text-6xl font-black uppercase tracking-wider md:tracking-widest font-['Rajdhani',sans-serif] text-white">
                             STUDIO-GRADE <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">PRODUCTION</span>
                         </h2>
                         <p className="text-gray-400 max-w-2xl mx-auto mt-6 text-lg">
@@ -223,7 +223,7 @@ const EventBroadcast = () => {
             <section className="py-32 bg-black relative flex items-center justify-center text-center overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.15)_0%,black_70%)] pointer-events-none" />
                 <div className="relative z-10 container-safe px-4">
-                    <h2 className="text-5xl md:text-7xl font-black uppercase text-white mb-6 tracking-tight">
+                    <h2 className="text-5xl md:text-7xl font-black uppercase tracking-wider md:tracking-widest text-white mb-6">
                         MAKE YOUR NEXT EVENT <br />
                         <span className="text-amber-500 font-['Rajdhani',sans-serif] italic drop-shadow-[0_0_20px_rgba(245,158,11,0.4)]">UNFORGETTABLE</span>
                     </h2>

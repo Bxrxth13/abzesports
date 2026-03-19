@@ -84,7 +84,7 @@ const CompetitiveEsports = () => {
                             <h2 className="text-red-500 font-bold uppercase tracking-[0.3em] text-sm md:text-base">Elite Competition Division</h2>
                         </div>
                         
-                        <h1 className="text-7xl md:text-[9rem] font-black uppercase leading-[0.8] mb-8 font-['Orbitron',sans-serif] italic text-white drop-shadow-2xl">
+                        <h1 className="text-7xl md:text-[9rem] font-black uppercase tracking-wider md:tracking-widest leading-[0.8] mb-8 font-['Orbitron',sans-serif] italic text-white drop-shadow-2xl">
                             CHAMPIONS <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-red-800" style={{ WebkitTextStroke: '1px rgba(220, 38, 38, 0.4)' }}>NEVER REST</span>
                         </h1>
@@ -173,7 +173,7 @@ const CompetitiveEsports = () => {
                 
                 <div className="container-safe relative z-10 px-4 max-w-6xl mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-5xl md:text-7xl font-black uppercase font-['Orbitron',sans-serif] inline-block bg-zinc-900 px-8 py-2 border-2 border-zinc-800 text-white shadow-[0_4px_20px_rgba(0,0,0,0.5)] skew-x-[-10deg]">
+                        <h2 className="text-5xl md:text-7xl font-black uppercase tracking-wider md:tracking-widest font-['Orbitron',sans-serif] inline-block bg-zinc-900 px-8 py-2 border-2 border-zinc-800 text-white shadow-[0_4px_20px_rgba(0,0,0,0.5)] skew-x-[-10deg]">
                             <span className="block skew-x-[10deg]">MATCH CENTER</span>
                         </h2>
                     </div> 
@@ -190,7 +190,7 @@ const CompetitiveEsports = () => {
                 </div>
                 
                 <div className="max-w-4xl text-center relative z-10">
-                    <h2 className="text-4xl md:text-6xl font-black uppercase mb-6">Train Like <span className="text-red-600 font-['Orbitron',sans-serif] italic">Professionals</span></h2>
+                    <h2 className="text-4xl md:text-6xl font-black uppercase tracking-wider md:tracking-widest mb-6 font-['Orbitron',sans-serif]">Train Like <span className="text-red-600 italic">Professionals</span></h2>
                     <p className="text-xl text-gray-400 font-medium leading-relaxed mb-10 max-w-2xl mx-auto">
                         Think you have the mechanics to compete under the banner? Participate in our public combine events and prove you are tier-1 material.
                     </p>

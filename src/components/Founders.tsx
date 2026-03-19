@@ -1,150 +1,99 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import AnimatedSection from './shared/AnimatedSection';
 import { founders } from '../data/sampleData';
 
 const Founders: React.FC = () => {
-  const [selectedFounder, setSelectedFounder] = useState(0);
-  const [selectedMilestone, setSelectedMilestone] = useState(0);
-
-
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AnimatedSection className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
-            MEET THE <span className="text-red-600">FOUNDERS</span>
+    <section className="py-24 bg-[#050505] relative overflow-hidden font-['Rajdhani',sans-serif]">
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-red-900/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-red-900/5 blur-[100px] rounded-full pointer-events-none" />
+
+      <div className="container-safe mx-auto px-4 relative z-10">
+        <AnimatedSection className="text-center mb-20">
+          <span className="text-red-500 font-bold uppercase tracking-[0.2em] text-sm block mb-4">The Visionaries</span>
+          <h2 className="text-5xl md:text-7xl font-black text-white uppercase font-['Orbitron',sans-serif] tracking-wider md:tracking-widest mb-6">
+            MEET THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-400">FOUNDERS</span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Visionary leaders who transformed their passion for gaming into
-            a thriving esports ecosystem that nurtures talent and creates champions.
+          <p className="text-lg md:text-xl text-gray-400 font-medium max-w-2xl mx-auto">
+            The masterminds behind Autobotz Esports. Driving the culture forward and setting the gold standard in competitive excellence.
           </p>
         </AnimatedSection>
 
-        {/* Founder Selection */}
-        <div className="flex justify-center mb-12">
-          <div className="flex bg-gray-800 rounded-full p-2">
-            {founders.map((founder, index) => (
-              <button
-                key={founder.id}
-                onClick={() => setSelectedFounder(index)}
-                className="relative px-6 py-3 rounded-full transition-colors duration-300"
-              >
-                {selectedFounder === index && (
-                  <div className="absolute inset-0 bg-red-600 rounded-full" />
-                )}
-                <span
-                  className={`relative z-10 font-semibold ${selectedFounder === index ? 'text-white' : 'text-gray-400'
-                    }`}
-                >
-                  {founder.name.split(' ')[0]}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div
-          key={selectedFounder}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
-        >
-          {/* Founder Profile */}
-          <div className="text-center lg:text-left">
-            <div className="relative mb-8">
-              <img
-                src={founders[selectedFounder].image}
-                alt={founders[selectedFounder].name}
-                className="w-64 h-64 mx-auto lg:mx-0 rounded-2xl object-cover border-4 border-red-600"
-              />
-              <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-3xl">
-                🏅
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-3xl font-bold text-white mb-2">
-                {founders[selectedFounder].name}
-              </h3>
-              <p className="text-red-600 font-semibold mb-4">
-                {founders[selectedFounder].title}
-              </p>
-
-              <blockquote className="text-xl text-gray-300 italic mb-6 border-l-4 border-red-600 pl-6">
-                "{founders[selectedFounder].quote}"
-              </blockquote>
-
-              <p className="text-gray-400 mb-6">
-                {founders[selectedFounder].bio}
-              </p>
-
-              {/* Social Links */}
-              <div className="flex justify-center lg:justify-start space-x-4 mb-8">
-                {Object.entries(founders[selectedFounder].socials).map(([platform, url]) => {
-                  const icon = platform === 'twitter' ? '🐦' : platform === 'linkedin' ? '💼' : platform === 'instagram' ? '📷' : '🔗';
-                  if (!url) return null;
-
-                  return (
-                    <a
-                      key={platform}
-                      href={url}
-                      className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-colors text-xl"
-                    >
-                      {icon}
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Timeline */}
-          <div className="bg-gray-900 rounded-2xl p-8 border border-gray-800">
-            <h4 className="text-2xl font-bold text-white mb-8 flex items-center">
-              <span className="text-2xl text-red-600 mr-3">📅</span>
-              Journey Timeline
-            </h4>
-
-            <div className="space-y-6">
-              {founders[selectedFounder].milestones.map((milestone, index) => (
-                <div
-                  key={index}
-                  className={`relative flex items-start space-x-4 cursor-pointer group ${selectedMilestone === index ? 'text-white' : 'text-gray-400'
-                    }`}
-                  onClick={() => setSelectedMilestone(index)}
-                >
-                  {/* Timeline dot */}
-                  <div className="relative">
-                    <div
-                      className={`w-4 h-4 rounded-full border-2 ${selectedMilestone === index
-                          ? 'bg-red-600 border-red-600'
-                          : 'bg-gray-700 border-gray-600 group-hover:border-red-600'
-                        }`}
-                    />
-                    {index < founders[selectedFounder].milestones.length - 1 && (
-                      <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-0.5 h-12 bg-gray-700" />
-                    )}
-                  </div>
-
-                  <div className="flex-1 pb-6">
-                    <div className="flex items-center space-x-3 mb-2">
-                      <span className={`font-bold ${selectedMilestone === index ? 'text-red-600' : 'text-gray-500 group-hover:text-red-600'
-                        }`}>
-                        {milestone.year}
-                      </span>
-                      {selectedMilestone === index && (
-                        <div className="bg-red-600 text-white px-2 py-1 rounded-full text-xs font-semibold">
-                          Active
-                        </div>
-                      )}
-                    </div>
-                    <p className={`${selectedMilestone === index ? 'text-white' : 'text-gray-400 group-hover:text-gray-300'
-                      } transition-colors`}>
-                      {milestone.event}
+        <div className="flex flex-col lg:flex-row justify-center gap-12 max-w-6xl mx-auto">
+          {founders.map((founder, index) => (
+            <motion.div
+              key={founder.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="relative group w-full lg:w-1/2 rounded-2xl overflow-hidden bg-zinc-900/50 border border-zinc-800 hover:border-red-600/50 transition-all duration-500"
+            >
+              <div className="relative h-[450px] md:h-[550px] overflow-hidden">
+                <img
+                  src={founder.image}
+                  alt={founder.name}
+                  className="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                />
+                
+                {/* Gradient Overlays */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-red-900/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Content Overlay */}
+                <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                  <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                    <h3 className="text-3xl font-black text-white uppercase font-['Orbitron',sans-serif] tracking-widest mb-1">
+                      {founder.name}
+                    </h3>
+                    <p className="text-red-500 font-bold uppercase tracking-[0.2em] text-sm mb-4">
+                      {founder.title}
                     </p>
+                    
+                    <div className="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 overflow-hidden mt-4">
+                      <p className="text-gray-300 leading-relaxed mb-6 font-medium italic border-l-2 border-red-600 pl-4">
+                        "{founder.quote}"
+                      </p>
+                      
+                      <div className="flex gap-4">
+                        {Object.entries(founder.socials).map(([platform, url]) => {
+                          if (!url) return null;
+                          return (
+                            <a
+                              key={platform}
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-12 h-12 rounded-full bg-zinc-800/80 backdrop-blur border border-zinc-700 flex items-center justify-center text-gray-400 hover:text-white hover:bg-red-600 hover:border-red-600 transition-all duration-300 hover:scale-110"
+                              aria-label={platform}
+                            >
+                              {platform === 'twitter' && (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                              )}
+                              {platform === 'linkedin' && (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                              )}
+                              {platform === 'instagram' && (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                              )}
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

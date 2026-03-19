@@ -45,28 +45,31 @@ const TalentEducation = () => {
 
     const tracks = [
         { 
-            name: 'MECHANICAL MASTER', 
-            icon: '⚡', 
+            name: 'PRO PLAYER BOOTCAMP', 
+            icon: '🎯', 
             color: 'from-cyan-500 to-blue-500', 
-            focus: ['Aim Consistency', 'Movement Tech', 'Crosshair Placement', 'Entry Fragging'],
-            desc: 'For the highly aggressive player seeking maximum raw output. We rebuild your mechanics from the ground up until headshots become subconscious.',
-            alumni: '85%'
+            focus: ['Mechanical Training', 'Scrimmage Blocks', 'VOD Analysis', 'Team Synergy'],
+            desc: 'A rigorous intensive program designed to transition high-elo pub-stompers into tier-1 tournament-ready athletes. Live, breathe, and compete at the highest level.',
+            statValue: '45+',
+            statLabel: 'Graduates Signed'
         },
         { 
-            name: 'IGL LEADERSHIP', 
-            icon: '🧠', 
-            color: 'from-teal-500 to-emerald-500', 
-            focus: ['Macro strategy', 'Mid-round Calls', 'Economy Management', 'Tilt Control'],
-            desc: 'Designed for the tactician. Learn how to read the map, control the tempo of a match, and lead a squad through high-pressure situations.',
-            alumni: '92%'
+            name: 'CREATOR INCUBATOR', 
+            icon: '🎥', 
+            color: 'from-teal-400 to-emerald-500', 
+            focus: ['Audience Retention', 'Viral Packaging', 'Stream Setup', 'Brand Pitching'],
+            desc: 'Build your personal brand. We provide the studio space, editing resources, and algorithmic strategies to scale your channel to millions of viewers.',
+            statValue: '150M+',
+            statLabel: 'Views Generated'
         },
         { 
-            name: 'ANALYST PATHWAY', 
-            icon: '📊', 
+            name: 'COACHING PATHWAY', 
+            icon: '📋', 
             color: 'from-blue-500 to-indigo-500', 
-            focus: ['VOD Dissection', 'Heatmap reading', 'Draft Strategy', 'Opponent Profiling'],
-            desc: 'Become the brain behind the scenes. Master data aggregation software, learn to find the micro-mistakes, and prepare championship-winning anti-strats.',
-            alumni: '99%'
+            focus: ['Drafting Phase', 'Economy Models', 'Mental Coaching', 'Data Analytics'],
+            desc: 'For the tactical minds. Learn to dissect opponents using our proprietary data software and develop championship-winning anti-strats as a coach or analyst.',
+            statValue: '22%',
+            statLabel: 'Avg Win-Rate Boost'
         }
     ];
 
@@ -84,7 +87,7 @@ const TalentEducation = () => {
                 <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative z-10 w-full max-w-5xl mx-auto">
                     <p className="text-cyan-400 uppercase tracking-[0.5em] text-xs md:text-sm font-bold mb-6">EST. 2024 / ACADEMY DIVISION</p>
                     
-                    <h1 className="text-6xl md:text-[7rem] font-black uppercase leading-[0.85] mb-8 break-words text-transparent bg-clip-text bg-gradient-to-br from-cyan-300 via-white to-teal-700">
+                    <h1 className="text-6xl md:text-[7rem] font-black uppercase tracking-wider md:tracking-widest leading-[0.85] mb-8 break-words text-transparent bg-clip-text bg-gradient-to-br from-cyan-300 via-white to-teal-700">
                         HACK YOUR <br/> <span className="text-white">POTENTIAL</span>
                     </h1>
                     
@@ -108,7 +111,7 @@ const TalentEducation = () => {
             {/* CURRICULUM ROADMAP - Vertical Timeline Pattern */}
             <section className="py-24 relative bg-[#01040a]">
                 <div className="container-safe max-w-4xl mx-auto relative z-10">
-                    <h2 className="text-4xl md:text-5xl font-black text-center mb-20 uppercase tracking-wide text-cyan-500 drop-shadow-[0_0_10px_rgba(6,182,212,0.3)]">The Simulation Phase</h2>
+                    <h2 className="text-4xl md:text-5xl font-black text-center mb-20 uppercase tracking-wider md:tracking-widest text-cyan-500 drop-shadow-[0_0_10px_rgba(6,182,212,0.3)]">The Simulation Phase</h2>
                     
                     <div className="relative border-l-2 border-cyan-900/40 md:border-l-0">
                         {/* Center Timeline Line for MD+ */}
@@ -146,13 +149,13 @@ const TalentEducation = () => {
                 <div className="container-safe px-4">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-20">
                         <div className="max-w-xl">
-                            <span className="text-cyan-400 font-bold uppercase tracking-[0.3em] text-sm block mb-4 border-l-2 border-cyan-500 pl-4">CLASS SYSTEM</span>
-                            <h2 className="text-5xl md:text-6xl font-black uppercase font-['Orbitron',sans-serif] text-white">
-                                SELECT YOUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-400">VECTOR</span>
+                            <span className="text-cyan-400 font-bold uppercase tracking-[0.3em] text-sm block mb-4 border-l-2 border-cyan-500 pl-4">PROGRAMS</span>
+                            <h2 className="text-5xl md:text-6xl font-black uppercase tracking-wider md:tracking-widest font-['Orbitron',sans-serif] text-white">
+                                TALENT <br className="hidden md:block"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-400">INCUBATION</span>
                             </h2>
                         </div>
                         <p className="text-gray-400 max-w-md md:text-right mt-6 md:mt-0 font-['Rajdhani',sans-serif] text-lg lg:text-xl">
-                            We don't do general training. You must commit to a primary role matrix to optimize your neural output.
+                            Whether you're aiming for the championship stage or building a digital empire, we have a specialized pathway to engineer your success.
                         </p>
                     </div>
 
@@ -177,8 +180,8 @@ const TalentEducation = () => {
                                             <span style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>{track.icon}</span>
                                         </div>
                                         <div className="text-right">
-                                            <span className="block text-3xl font-black text-white font-['Orbitron',sans-serif] group-hover:text-cyan-400 transition-colors uppercase">{track.alumni}</span>
-                                            <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Success Rate</span>
+                                            <span className="block text-3xl font-black text-white font-['Orbitron',sans-serif] group-hover:text-cyan-400 transition-colors uppercase">{track.statValue}</span>
+                                            <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">{track.statLabel}</span>
                                         </div>
                                     </div>
                                     
@@ -209,6 +212,63 @@ const TalentEducation = () => {
                                 <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center pointer-events-none" />
                             </motion.div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* BOOTCAMP FACILITIES */}
+            <section className="py-24 bg-black relative border-t border-cyan-900/30 overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(6,182,212,0.1)_0%,transparent_60%)]" />
+                <div className="container-safe px-4 relative z-10">
+                    <div className="text-center mb-16">
+                        <span className="text-cyan-500 font-bold uppercase tracking-widest text-sm block mb-4">Infrastructure</span>
+                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider md:tracking-widest font-['Orbitron',sans-serif] text-white">
+                            THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">FACILITY</span>
+                        </h2>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                        <div className="space-y-8">
+                            {[
+                                { title: 'High-Performance Rigs', desc: 'Sponsor-provided PC setups boasting 500Hz monitors and sub-1ms latency peripherals to strictly match Tier 1 LAN tournament environments.' },
+                                { title: 'Creator Studios', desc: 'Acoustically treated streaming pods equipped with dual-PC setups, 4K cinema cameras, and professional dynamic audio lighting.' },
+                                { title: 'VOD Review Theater', desc: 'Tactical briefing and debriefing rooms featuring ultra-wide interactive smartboards for comprehensive team macro analysis.' },
+                                { title: 'Physical Conditioning', desc: 'On-site gym and specialized eSports physiotherapists to prevent RSI and optimize physical stamina during 12-hour intensive scrim blocks.' }
+                            ].map((feature, i) => (
+                                <motion.div 
+                                    key={i}
+                                    initial={{ opacity: 0, x: -30 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                                    className="border-l-2 border-cyan-900 pl-6 hover:border-cyan-400 transition-colors group cursor-default"
+                                >
+                                    <h4 className="text-xl font-bold text-white uppercase tracking-wide mb-2 group-hover:text-cyan-300 transition-colors">{feature.title}</h4>
+                                    <p className="text-cyan-100/60 font-medium font-['Rajdhani'] leading-relaxed text-lg">{feature.desc}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            className="relative h-[600px] border border-cyan-900/40 rounded-sm overflow-hidden group mt-10 md:mt-0"
+                        >
+                            {/* Futuristic image overlay */}
+                            <img src="/images/sectors/education.png" alt="Facility Setup" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700 mix-blend-luminosity grayscale group-hover:grayscale-0" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#020813] via-transparent to-transparent pointer-events-none" />
+                            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-cyan-900/40 to-transparent mix-blend-overlay pointer-events-none" />
+                            
+                            <div className="absolute bottom-8 left-8 right-8">
+                                <div className="backdrop-blur-md bg-black/40 border border-cyan-500/30 p-6">
+                                    <div className="flex items-center gap-4 mb-2">
+                                        <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(6,182,212,1)]" />
+                                        <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest">Location Active</span>
+                                    </div>
+                                    <h3 className="text-2xl font-black text-white font-['Orbitron',sans-serif] uppercase tracking-wide drop-shadow-md">Delhi HQ Basecamp</h3>
+                                </div>
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>

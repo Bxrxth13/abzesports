@@ -222,6 +222,9 @@ const Hero = ({ onShowModal }: { onShowModal?: (title: string, message: string) 
             <CustomCursor />
             {/* Background Layers */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                {/* Photo Background */}
+                <div className="absolute inset-0 bg-[url('/images/hero/homebg.jpeg')] bg-cover bg-center opacity-30 mix-blend-luminosity" />
+ 
                 {/* Radial Glow */}
                 <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-[radial-gradient(circle,rgba(220,20,60,0.15)_0%,rgba(0,0,0,0)_70%)] blur-[100px]" />
 
@@ -290,7 +293,7 @@ const Hero = ({ onShowModal }: { onShowModal?: (title: string, message: string) 
                         className="max-w-xl font-['Rajdhani',sans-serif] tracking-wide"
                     >
                         <span className="text-lg sm:text-xl md:text-2xl font-light text-gray-300">
-                           " Culture <span className="text-red-500 font-bold">Derives</span> Everything."
+                           " Culture <span className="text-red-500 font-bold">Drives</span> Everything."
                         </span>
                         <br />
                         <span className="text-sm sm:text-base text-gray-500 mt-2 inline-block italic">

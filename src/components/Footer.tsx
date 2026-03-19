@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const footerLinks = [
   {
@@ -41,17 +41,58 @@ const footerLinks = [
 ];
 
 const Footer: React.FC = () => {
+  const { pathname } = useLocation();
+
+  const getTheme = () => {
+    if (pathname.includes('/marketing')) {
+      return {
+        bgGradient: 'from-violet-900',
+        radialHex: '#8b5cf6', // violet-500
+        borderLeft: 'border-violet-600',
+        hoverText: 'hover:text-violet-400',
+        hoverBorder: 'hover:border-violet-600',
+      };
+    }
+    if (pathname.includes('/education')) {
+      return {
+        bgGradient: 'from-cyan-900',
+        radialHex: '#06b6d4', // cyan-500
+        borderLeft: 'border-cyan-600',
+        hoverText: 'hover:text-cyan-400',
+        hoverBorder: 'hover:border-cyan-600',
+      };
+    }
+    if (pathname.includes('/events')) {
+      return {
+        bgGradient: 'from-amber-900',
+        radialHex: '#f59e0b', // amber-500
+        borderLeft: 'border-amber-600',
+        hoverText: 'hover:text-amber-400',
+        hoverBorder: 'hover:border-amber-600',
+      };
+    }
+    return {
+      bgGradient: 'from-red-900',
+      radialHex: '#C8102E', // red-600
+      borderLeft: 'border-red-600',
+      hoverText: 'hover:text-red-400',
+      hoverBorder: 'hover:border-red-600',
+    };
+  };
+
+  const theme = getTheme();
+
   return (
     <footer id="footer" className="relative overflow-hidden bg-black py-16">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-900 via-black to-black opacity-60" />
+        <div className={`absolute inset-0 bg-gradient-to-br ${theme.bgGradient} via-black to-black opacity-60`} />
         <motion.div
           animate={{
             background: [
-              'radial-gradient(circle at 20% 80%, #C8102E 0%, transparent 50%)',
-              'radial-gradient(circle at 80% 20%, #C8102E 0%, transparent 50%)',
-              'radial-gradient(circle at 40% 40%, #C8102E 0%, transparent 50%)',
+              `radial-gradient(circle at 20% 80%, ${theme.radialHex} 0%, transparent 50%)`,
+              `radial-gradient(circle at 80% 20%, ${theme.radialHex} 0%, transparent 50%)`,
+              `radial-gradient(circle at 40% 40%, ${theme.radialHex} 0%, transparent 50%)`,
             ]
           }}
           transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
@@ -79,7 +120,7 @@ const Footer: React.FC = () => {
                 href="https://www.instagram.com/autobotz_esports?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-900 border-l-4 border-red-600 flex items-center justify-center text-gray-400 hover:text-white transition-all transform hover:scale-110"
+                className={`w-10 h-10 bg-gray-900 border-l-4 ${theme.borderLeft} flex items-center justify-center text-gray-400 hover:text-white transition-all transform hover:scale-110`}
                 aria-label="Instagram"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -92,7 +133,7 @@ const Footer: React.FC = () => {
                 href="https://twitter.com/autobotzesports"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-900 border-l-4 border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-600 transition-all transform hover:scale-110"
+                className={`w-10 h-10 bg-gray-900 border-l-4 border-gray-700 flex items-center justify-center text-gray-400 hover:text-white ${theme.hoverBorder} transition-all transform hover:scale-110`}
                 aria-label="Twitter"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -103,7 +144,7 @@ const Footer: React.FC = () => {
                 href="https://youtube.com/@autobotzesports"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-900 border-l-4 border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-600 transition-all transform hover:scale-110"
+                className={`w-10 h-10 bg-gray-900 border-l-4 border-gray-700 flex items-center justify-center text-gray-400 hover:text-white ${theme.hoverBorder} transition-all transform hover:scale-110`}
                 aria-label="YouTube"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -118,18 +159,18 @@ const Footer: React.FC = () => {
           <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-8 pl-0 lg:pl-20 pt-0 lg:pt-14">
             {footerLinks.map(({ category, links }) => (
               <div key={category}>
-                <h3 className="text-white font-bold uppercase text-xs mb-5 border-l-4 border-red-600 pl-3 tracking-widest">
+                <h3 className={`text-white font-bold uppercase text-xs mb-5 border-l-4 ${theme.borderLeft} pl-3 tracking-widest`}>
                   {category}
                 </h3>
                 <ul className="space-y-3">
                   {links.map(link => (
                     <li key={link.name}>
                       {link.path.startsWith('/#') ? (
-                        <a href={link.path} className="text-gray-400 hover:text-red-400 transition-colors text-sm">
+                        <a href={link.path} className={`text-gray-400 ${theme.hoverText} transition-colors text-sm`}>
                           {link.name}
                         </a>
                       ) : (
-                        <Link to={link.path} className="text-gray-400 hover:text-red-400 transition-colors text-sm">
+                        <Link to={link.path} className={`text-gray-400 ${theme.hoverText} transition-colors text-sm`}>
                           {link.name}
                         </Link>
                       )}
@@ -146,9 +187,9 @@ const Footer: React.FC = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-sm">
             <p className="text-gray-500">© 2026 AUTOBOTZ ESPORTS. All rights reserved.</p>
             <div className="flex flex-wrap items-center gap-4 text-gray-500">
-              <a href="#" className="hover:text-red-400 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-red-400 transition-colors">Terms of Service</a>
-              <a href="/#footer" className="hover:text-red-400 transition-colors">Support</a>
+              <a href="#" className={`${theme.hoverText} transition-colors`}>Privacy Policy</a>
+              <a href="#" className={`${theme.hoverText} transition-colors`}>Terms of Service</a>
+              <a href="/#footer" className={`${theme.hoverText} transition-colors`}>Support</a>
             </div>
           </div>
         </div>

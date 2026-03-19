@@ -106,7 +106,7 @@ const Marketing = () => {
                             <h2 className="text-cyan-400 font-bold uppercase tracking-[0.4em] text-sm font-['Orbitron',sans-serif]">Autobotz Marketing Division</h2>
                         </div>
                         
-                        <h1 className="text-6xl md:text-[8rem] font-black uppercase leading-[0.85] mb-8 font-['Orbitron',sans-serif]">
+                        <h1 className="text-6xl md:text-[8rem] font-black uppercase tracking-wider md:tracking-widest leading-[0.85] mb-8 font-['Orbitron',sans-serif]">
                             CAPTURE <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-400 drop-shadow-lg">THE CULTURE</span>
                         </h1>
@@ -153,7 +153,7 @@ const Marketing = () => {
                 <div className="container-safe px-6">
                     <div className="text-center mb-24 relative">
                         <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-3/4 h-32 bg-violet-600/10 blur-[100px] -z-10" />
-                        <h2 className="text-5xl md:text-7xl font-black uppercase font-['Orbitron',sans-serif] text-white">
+                        <h2 className="text-5xl md:text-7xl font-black uppercase tracking-wider md:tracking-widest font-['Orbitron',sans-serif] text-white">
                             THE ACTIVATION <span className="text-transparent bg-clip-text bg-gradient-to-b from-violet-400 to-cyan-600">MATRIX</span>
                         </h2>
                         <p className="text-gray-400 text-lg md:text-xl font-medium mt-6 tracking-wide max-w-2xl mx-auto">
@@ -208,7 +208,7 @@ const Marketing = () => {
                     <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                         <div>
                             <span className="text-cyan-500 font-bold uppercase tracking-[0.3em] text-sm block mb-4 border-l-2 border-cyan-500 pl-4">DATA ARCHIVE</span>
-                            <h2 className="text-5xl md:text-6xl font-black uppercase font-['Orbitron',sans-serif] text-white">
+                            <h2 className="text-5xl md:text-6xl font-black uppercase tracking-wider md:tracking-widest font-['Orbitron',sans-serif] text-white">
                                 PERFORMANCE <br className="hidden md:block"/> LOGS
                             </h2>
                         </div>
@@ -253,7 +253,7 @@ const Marketing = () => {
             <section className="py-40 relative bg-[#03010a] overflow-hidden flex items-center justify-center">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.15)_0%,#03010a_60%)] pointer-events-none" />
                 <div className="max-w-4xl px-6 text-center relative z-10">
-                    <h2 className="text-6xl md:text-[6rem] font-black uppercase mb-8 font-['Orbitron',sans-serif] text-white">
+                    <h2 className="text-6xl md:text-[6rem] font-black uppercase tracking-wider md:tracking-widest mb-8 font-['Orbitron',sans-serif] text-white">
                         READY TO <br/>
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-cyan-500">GO VIRAL?</span>
                     </h2>
